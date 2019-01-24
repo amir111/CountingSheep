@@ -1,4 +1,4 @@
-# Hotelezzo
+# CountingSheep
 
 **Walt Brady, Imran Ahmed, Amir Sadiev** 
 
