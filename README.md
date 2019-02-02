@@ -1,6 +1,6 @@
 # CountingSheep
 
-**Walt Brady, Imran Ahmed, Amir Sadiev** 
+**Walt Brady, Imran Ahmed, MacLean Frazier, Amir Sadiev** 
 
 **Univeristy of North Carolina - Greensboro** 
 
