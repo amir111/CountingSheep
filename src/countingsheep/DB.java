@@ -1,7 +1,7 @@
 package countingsheep;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class DB {
 
@@ -16,14 +16,47 @@ public class DB {
             String username = "java";
             String password = "password";
             connect = DriverManager.getConnection(url, username, password);
-            
+
         } catch (Exception e) {
-            throw new IllegalStateException("Cannot connect",e);
+            throw new IllegalStateException("Cannot connect to the database", e);
         }
         return connect;
     }
-    
-    public static void searchUsers(){
+
+    //Used to test database connection, will probably be removed later
+    public static void selectUsers() {
         Connection conn = connect();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT uname FROM user");
+            while (rs.next()) {
+                System.out.println(rs.getString("uname"));
+            }
+            conn.close();
+        } catch (Exception e) {
+            throw new IllegalStateException("", e);
+        }
+    }
+
+    //Used to obtain a specific user's data for login or displaying a manger of a hotel's contact information
+    public static ArrayList<String> selectTargetUser(String uname) {
+        ArrayList<String> user = new ArrayList<>();
+        Connection conn = connect();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM user WHERE uname = '" + uname + "'");
+            if (rs.next()) {
+                user.add(rs.getString("user_id"));
+                user.add(rs.getString("uname"));
+                user.add(rs.getString("pword"));
+                user.add(rs.getString("email"));
+                user.add(rs.getString("phone"));
+                user.add(rs.getString("user_type"));
+            }
+            conn.close();
+        } catch (Exception e) {
+            throw new IllegalStateException("", e);
+        }
+        return user;
     }
 }
