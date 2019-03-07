@@ -9,12 +9,12 @@ public class DB {
         Connection connect = null;
         try {
             //NOTE: This method will not work unless you go to project properties -> libraries -> add the jar thats in the mysql-connector-java... folder
-            String serverName = "localhost:3306";
+            String serverName = "counting-sheep-db.cr86epichnnr.us-east-2.rds.amazonaws.com:3306";
             String mydatabase = "counting_sheep";
             String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
 
-            String username = "java";
-            String password = "password";
+            String username = "webrady";
+            String password = "4bJvyriM8DZfwDG";
             connect = DriverManager.getConnection(url, username, password);
 
         } catch (Exception e) {
@@ -28,7 +28,7 @@ public class DB {
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT uname FROM user");
+            ResultSet rs = statement.executeQuery("SELECT uname FROM User");
             while (rs.next()) {
                 System.out.println(rs.getString("uname"));
             }
@@ -44,7 +44,7 @@ public class DB {
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM user WHERE uname = '" + uname + "'");
+            ResultSet rs = statement.executeQuery("SELECT * FROM User WHERE uname = '" + uname + "'");
             if (rs.next()) {
                 user.add(rs.getString("user_id"));
                 user.add(rs.getString("uname"));
