@@ -108,23 +108,23 @@ public class DB {
     }
     
     //Returns a list of rooms based on search inputs, leave parameters as 0.0f for price and the empty string for state if the client did not search using these
-    public static ArrayList<Room> selectRooms(float price,String state) {
+    public static ArrayList<Room> selectRooms(float price,String city) {
         ArrayList<Room> roomList = new ArrayList<>();
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
             ResultSet rs;
-            if(price == 0.0f && state.isEmpty()){
+            if(price == 0.0f && city.isEmpty()){
                 rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id");
             }
             else if(price == 0.0f){
-                rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id AND h.city = '" +state+"'");
+                rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id AND h.city = '" +city+"'");
             }
-            else if(state.isEmpty()){
+            else if(city.isEmpty()){
                 rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id AND r.price = " + price);
             }
             else{
-                rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id AND r.price = " + price + " AND h.city = '" +state+"'");
+                rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id AND r.price = " + price + " AND h.city = '" +city+"'");
             }
             while (rs.next()) {
                 Room newRoom = new Room();
@@ -172,8 +172,11 @@ public class DB {
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("SELECT max(request_id) FROM Request");
             rs.next();
-            int uuid = rs.getInt("max(request_id)");
-            inserted = statement.execute("insert into Request values("+uuid+",'"+desc+"','"+category+"',now(),NULL,6,"+clientUuid);
+            int uuid = rs.getInt("max(request_id)") + 1;
+            int numInserted = statement.executeUpdate("insert into Request\n values('"+uuid+"','"+desc+"','"+category+"',now(),NULL,'6','"+clientUuid+"');");
+            if(numInserted > 0){
+                inserted = true;
+            }
             conn.close();
         } catch (Exception e) {
             throw new IllegalStateException("", e);

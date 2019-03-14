@@ -16,9 +16,6 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.JPanel;
 
-//
-import java.util.ArrayList;
-//
 public class Login {
 
 	private JFrame frame;
@@ -45,7 +42,7 @@ public class Login {
 	 * Create the application.
 	 */
 	public Login() {
-		initialize();
+            initialize();
 	}
 
 	/**
