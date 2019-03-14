@@ -1,15 +1,15 @@
 
 public class Room extends Hotel {
-    String roomName;
+    int roomName;
     float roomPrice;
-    String roomID;
+    int roomID;
     String roomDescription;
     
     public Room(){
         
     }
     
-    public String getRoomName(){
+    public int getRoomName(){
         return roomName;
     }
     
@@ -17,7 +17,7 @@ public class Room extends Hotel {
         return roomPrice;
     }
     
-    public String getRoomID(){
+    public int getRoomID(){
         return roomID;
     }
     
@@ -25,7 +25,7 @@ public class Room extends Hotel {
         return roomDescription;
     }
     
-    public void setRoomName(String _roomName){
+    public void setRoomName(int _roomName){
         roomName = _roomName;
     }
     
@@ -33,7 +33,7 @@ public class Room extends Hotel {
         roomPrice = _roomPrice;
     }
     
-    public void setRoomID(String _roomID){
+    public void setRoomID(int _roomID){
         roomID = _roomID;
     }
     
