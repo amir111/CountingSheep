@@ -6,6 +6,7 @@ public class User {
      String email;
      String phone;
      String name;
+     int uuid;
   
     public User(){
         
@@ -57,6 +58,16 @@ public class User {
     public void setName(String _name){
         name = _name;
     }
+
+    public int getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(int uuid) {
+        this.uuid = uuid;
+    }
+    
+    
 
 }
 
