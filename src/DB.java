@@ -57,4 +57,30 @@ public class DB {
         }
         return user;
     }
+    /*
+    TO IMPLEMENT QUERIES
+    Guest
+        Booking Info
+            Gets the hotel information where a specific customer is staying     
+                SELECT * FROM Booking b, Room r, Hotel h
+                WHERE b.room_id = r.room_id AND r.hotel_id = h.hotel_id AND b.customer_id = 7
+            Returns the requests made by this client
+                SELECT * FROM Request
+                WHERE customer_id = 7
+        Book Room
+            Search for rooms with these qualities
+                SELECT * FROM Room r, Hotel h
+                WHERE r.hotel_id = h.hotel_id AND r.price = 120.00 AND h.city = 'Greensboro'
+        Request
+            Create a new request
+                insert into Request
+                values(2,'Pizza','Food',now(),NULL,6,7)
+            Check the largest request_id so that a new one can be made
+                SELECT max(request_id)
+                FROM Request
+    
+    Concerns
+    GUI: Each hotel has multiple rooms, but GUI only shows the hotels, not each individual room available to book
+    Guest Request screen has a few typos
+    */
 }
