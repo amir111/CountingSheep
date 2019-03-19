@@ -81,7 +81,7 @@ public class Login {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
                                 //custom login user name and password
-				String uname = usernamefield.getText();
+                                String uname = usernamefield.getText();
 				String pds = passwordfield.getText();
 				if(uname.equals("guest") && pds.equals("guest")) {
 					JOptionPane.showMessageDialog(frame, "You are logged in");
