@@ -22,7 +22,7 @@ public class DB {
     }
 
     //Used to test database connection, will probably be removed later
-    public static void selectUsers() {
+    /*public static void selectUsers() {
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
@@ -35,21 +35,26 @@ public class DB {
             throw new IllegalStateException("", e);
         }
     }
-
+    */
+    
     //Used to obtain a specific user's data for login or displaying a manger of a hotel's contact information
-    public static ArrayList<String> selectTargetUser(String uname) {
-        ArrayList<String> user = new ArrayList<>();
+    public static User selectTargetUser(String uname) {
+        User user = new User();
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM User WHERE uname = '" + uname + "'");
             if (rs.next()) {
-                user.add(rs.getString("user_id"));
-                user.add(rs.getString("uname"));
-                user.add(rs.getString("pword"));
-                user.add(rs.getString("email"));
-                user.add(rs.getString("phone"));
-                user.add(rs.getString("user_type"));
+                user.setUuid(rs.getInt("user_id"));
+                user.setUsername(rs.getString("uname"));
+                user.setPassword(rs.getString("pword"));
+                user.setEmail(rs.getString("email"));
+                user.setPhone(rs.getString("phone"));
+                if (rs.getInt("user_type") == 1) {
+                    user.setID('M');
+                } else {
+                    user.setID('C');
+                }
             }
             conn.close();
         } catch (Exception e) {
@@ -57,30 +62,151 @@ public class DB {
         }
         return user;
     }
-    /*
-    TO IMPLEMENT QUERIES
-    Guest
-        Booking Info
-            Gets the hotel information where a specific customer is staying     
-                SELECT * FROM Booking b, Room r, Hotel h
-                WHERE b.room_id = r.room_id AND r.hotel_id = h.hotel_id AND b.customer_id = 7
-            Returns the requests made by this client
-                SELECT * FROM Request
-                WHERE customer_id = 7
-        Book Room
-            Search for rooms with these qualities
-                SELECT * FROM Room r, Hotel h
-                WHERE r.hotel_id = h.hotel_id AND r.price = 120.00 AND h.city = 'Greensboro'
-        Request
-            Create a new request
-                insert into Request
-                values(2,'Pizza','Food',now(),NULL,6,7)
-            Check the largest request_id so that a new one can be made
-                SELECT max(request_id)
-                FROM Request
+
+    //Returns a list of rooms booked by a specific client identified by their uuid
+    public static ArrayList<Room> selectBookedRoom(int clientUuid) {
+        ArrayList<Room> roomList = new ArrayList<>();
+        Connection conn = connect();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Booking b, Room r, Hotel h WHERE b.room_id = r.room_id AND r.hotel_id = h.hotel_id AND b.customer_id = " + clientUuid);
+            while (rs.next()) {
+                Room newRoom = new Room();
+                newRoom.setAddress(rs.getString("address"));
+                newRoom.setCity(rs.getString("city"));
+                newRoom.setName(rs.getString("name"));
+                newRoom.setRoomDescription(rs.getString("description"));
+                newRoom.setRoomID(rs.getInt("room_id"));
+                newRoom.setRoomName(rs.getInt("number"));
+                newRoom.setRoomPrice(rs.getFloat("price"));
+                newRoom.setState("state");
+                if(rs.getInt("pool") == 1){
+                    newRoom.setPool(true);
+                }
+                else{
+                    newRoom.setPool(false);
+                }
+                if(rs.getInt("breakfast") == 1){
+                    newRoom.setBreakfast(true);
+                }
+                else{
+                    newRoom.setBreakfast(false);
+                }
+                if(rs.getInt("food_delivery") == 1){
+                    newRoom.setFoodDelivery(true);
+                }
+                else{
+                    newRoom.setFoodDelivery(false);
+                }
+                roomList.add(newRoom);
+            }
+            conn.close();
+        } catch (Exception e) {
+            throw new IllegalStateException("", e);
+        }
+        return roomList;
+    }
     
-    Concerns
-    GUI: Each hotel has multiple rooms, but GUI only shows the hotels, not each individual room available to book
-    Guest Request screen has a few typos
-    */
+    //Returns a list of rooms based on search inputs, leave parameters as 0.0f for price and the empty string for state if the client did not search using these
+    public static ArrayList<Room> selectRooms(float price,String city) {
+        ArrayList<Room> roomList = new ArrayList<>();
+        Connection conn = connect();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs;
+            if(price == 0.0f && city.isEmpty()){
+                rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id");
+            }
+            else if(price == 0.0f){
+                rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id AND h.city = '" +city+"'");
+            }
+            else if(city.isEmpty()){
+                rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id AND r.price = " + price);
+            }
+            else{
+                rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id AND r.price = " + price + " AND h.city = '" +city+"'");
+            }
+            while (rs.next()) {
+                Room newRoom = new Room();
+                newRoom.setAddress(rs.getString("address"));
+                newRoom.setCity(rs.getString("city"));
+                newRoom.setName(rs.getString("name"));
+                newRoom.setRoomDescription(rs.getString("description"));
+                newRoom.setRoomID(rs.getInt("room_id"));
+                newRoom.setRoomName(rs.getInt("number"));
+                newRoom.setRoomPrice(rs.getFloat("price"));
+                newRoom.setState("state");
+                if(rs.getInt("pool") == 1){
+                    newRoom.setPool(true);
+                }
+                else{
+                    newRoom.setPool(false);
+                }
+                if(rs.getInt("breakfast") == 1){
+                    newRoom.setBreakfast(true);
+                }
+                else{
+                    newRoom.setBreakfast(false);
+                }
+                if(rs.getInt("food_delivery") == 1){
+                    newRoom.setFoodDelivery(true);
+                }
+                else{
+                    newRoom.setFoodDelivery(false);
+                }
+                roomList.add(newRoom);
+            }
+            conn.close();
+        } catch (Exception e) {
+            throw new IllegalStateException("", e);
+        }
+        return roomList;
+    }
+    
+    //NOTE: Not fully implemented yet, just sends a request to manager 6
+    //Creates a request based on client desires, returns true if request was made, false if not
+    public static boolean insertNewRequest(String desc, String category, int clientUuid){
+        boolean inserted = false;
+        Connection conn = connect();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT max(request_id) FROM Request");
+            rs.next();
+            int uuid = rs.getInt("max(request_id)") + 1;
+            int numInserted = statement.executeUpdate("insert into Request\n values('"+uuid+"','"+desc+"','"+category+"',now(),NULL,'6','"+clientUuid+"');");
+            if(numInserted > 0){
+                inserted = true;
+            }
+            conn.close();
+        } catch (Exception e) {
+            throw new IllegalStateException("", e);
+        }
+        return inserted;
+    }
+    /*
+     TO IMPLEMENT QUERIES
+     Guest
+     Booking Info
+     //Gets the hotel information where a specific customer is staying     
+     //SELECT * FROM Booking b, Room r, Hotel h
+     //WHERE b.room_id = r.room_id AND r.hotel_id = h.hotel_id AND b.customer_id = 7
+     Returns the requests made by this client
+     SELECT * FROM Request
+     WHERE customer_id = 7
+     //Book Room
+     //Search for rooms with these qualities
+     //SELECT * FROM Room r, Hotel h
+     //WHERE r.hotel_id = h.hotel_id AND r.price = 120.00 AND h.city = 'Greensboro'
+     ~Request
+     ~Create a new request
+     ~insert into Request
+     ~values(2,'Pizza','Food',now(),NULL,6,7)
+     ~Check the largest request_id so that a new one can be made
+     ~SELECT max(request_id)
+     ~FROM Request
+    
+    TO DO:
+    Return a list of bookings of a certain room
+    Create a booking
+     */
 }
