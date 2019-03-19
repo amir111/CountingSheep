@@ -20,23 +20,20 @@ public class DB {
         }
         return connect;
     }
-
-    //Used to test database connection, will probably be removed later
-    /*public static void selectUsers() {
-        Connection conn = connect();
-        try {
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT uname FROM User");
-            while (rs.next()) {
-                System.out.println(rs.getString("uname"));
-            }
-            conn.close();
-        } catch (Exception e) {
-            throw new IllegalStateException("", e);
-        }
-    }
-    */
     
+    private static int getNewId(String table, Statement statement){
+        int uuid = -1;
+        try{
+            ResultSet rs = statement.executeQuery("SELECT max("+ table.toLowerCase() +"_id) FROM " + table);
+            rs.next();
+            uuid = rs.getInt("max("+table.toLowerCase()+"_id)") + 1;
+        }
+        catch(Exception e){
+            
+        }
+        return uuid;
+    }
+
     //Used to obtain a specific user's data for login or displaying a manger of a hotel's contact information
     public static User selectTargetUser(String uname) {
         User user = new User();
@@ -163,17 +160,14 @@ public class DB {
         return roomList;
     }
     
-    //NOTE: Not fully implemented yet, just sends a request to manager 6
     //Creates a request based on client desires, returns true if request was made, false if not
-    public static boolean insertNewRequest(String desc, String category, int clientUuid){
+    public static boolean insertNewRequest(String desc, String category, int managerUuid, int clientUuid){
         boolean inserted = false;
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT max(request_id) FROM Request");
-            rs.next();
-            int uuid = rs.getInt("max(request_id)") + 1;
-            int numInserted = statement.executeUpdate("insert into Request\n values('"+uuid+"','"+desc+"','"+category+"',now(),NULL,'6','"+clientUuid+"');");
+            int uuid = getNewId("Request",statement);
+            int numInserted = statement.executeUpdate("insert into Request\n values('"+uuid+"','"+desc+"','"+category+"',now(),NULL,'"+managerUuid+"','"+clientUuid+"');");
             if(numInserted > 0){
                 inserted = true;
             }
@@ -185,28 +179,16 @@ public class DB {
     }
     /*
      TO IMPLEMENT QUERIES
-     Guest
-     Booking Info
-     //Gets the hotel information where a specific customer is staying     
-     //SELECT * FROM Booking b, Room r, Hotel h
-     //WHERE b.room_id = r.room_id AND r.hotel_id = h.hotel_id AND b.customer_id = 7
      Returns the requests made by this client
      SELECT * FROM Request
      WHERE customer_id = 7
-     //Book Room
-     //Search for rooms with these qualities
-     //SELECT * FROM Room r, Hotel h
-     //WHERE r.hotel_id = h.hotel_id AND r.price = 120.00 AND h.city = 'Greensboro'
-     ~Request
-     ~Create a new request
-     ~insert into Request
-     ~values(2,'Pizza','Food',now(),NULL,6,7)
-     ~Check the largest request_id so that a new one can be made
-     ~SELECT max(request_id)
-     ~FROM Request
-    
-    TO DO:
+
     Return a list of bookings of a certain room
+    SELECT * FROM Booking
+    WHERE room_id = someNumber
+    
     Create a booking
+    SELECT max(booking_id) FROM Booking
+    insert into Booking\n values(id,start_date,end_date,customer_id,room_id)
      */
 }
