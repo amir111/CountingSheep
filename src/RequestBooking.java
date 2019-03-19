@@ -1,4 +1,4 @@
-import java.util.Date;
+import java.sql.Date;
 
 public class RequestBooking {
     //3 ints 2dates 
@@ -13,7 +13,7 @@ public class RequestBooking {
     }
 
     public void setBooking_id(int booking_id) {
-        booking_id = booking_id;
+        this.booking_id = booking_id;
     }
     
     public int getCustomer_id(){
@@ -21,7 +21,7 @@ public class RequestBooking {
     }
 
     public void setCustomer_id(int customer_id) {
-        customer_id = customer_id;
+        this.customer_id = customer_id;
     }
     
     public int getRoom_id(){
@@ -29,7 +29,7 @@ public class RequestBooking {
     }
 
     public void setRoom_id(int room_id) {
-        room_id = room_id;
+        this.room_id = room_id;
     }
     
     public Date getStart_date(){
@@ -37,7 +37,7 @@ public class RequestBooking {
     }
 
     public void setStart_date(Date start_date) {
-        start_date = start_date;
+        this.start_date = start_date;
     }
     
     public Date getEnd_date(){
@@ -45,6 +45,6 @@ public class RequestBooking {
     }
 
     public void setEnd_date(Date end_date) {
-        end_date = end_date;
+        this.end_date = end_date;
     }
 }

@@ -16,6 +16,9 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.JPanel;
 
+//Remove later, I'm leaving this for when I test my stuff  -Walt
+import java.util.ArrayList;
+import java.util.Date;
 public class Login {
 
 	private JFrame frame;
