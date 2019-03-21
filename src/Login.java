@@ -84,7 +84,6 @@ public class Login {
 				String uname = usernamefield.getText();
 				String pds = passwordfield.getText();
 				if(uname.equals("guest") && pds.equals("guest")) {
-					JOptionPane.showMessageDialog(frame, "You are logged in");
 					frame.dispose();
 					Guest guest1 = new Guest();
 					guest1.setVisible(true);
