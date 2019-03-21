@@ -235,4 +235,13 @@ public class DB {
         }
         return inserted;
     }
+    
+    /*
+    TO DO:
+    Insert new room by hotel id
+    Delete room by hotel id and room number
+    Update room by hotel id and room number
+    Select requests by hotel id and {complete/incomplete}
+    Update requests as complete
+    */
 }
