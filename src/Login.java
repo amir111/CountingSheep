@@ -16,6 +16,9 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.JPanel;
 
+//Remove later, I'm leaving this for when I test my stuff  -Walt
+import java.util.ArrayList;
+import java.util.Date;
 public class Login {
 
 	private JFrame frame;
@@ -26,7 +29,7 @@ public class Login {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+            EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Login window = new Login();
@@ -42,7 +45,7 @@ public class Login {
 	 * Create the application.
 	 */
 	public Login() {
-		initialize();
+            initialize();
 	}
 
 	/**
@@ -81,7 +84,7 @@ public class Login {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
                                 //custom login user name and password
-				String uname = usernamefield.getText();
+                                String uname = usernamefield.getText();
 				String pds = passwordfield.getText();
 				if(uname.equals("guest") && pds.equals("guest")) {
 					frame.dispose();
