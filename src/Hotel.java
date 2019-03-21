@@ -2,8 +2,8 @@ import java.lang.Object;
 import java.util.ArrayList;
 
 public class Hotel {
-    //Room[] room = new Room[];
-    ArrayList<Room> room = new ArrayList<Room>();
+    int hotelID;
+    ArrayList<Room> room = new ArrayList<>();
     String hotelName;
     String state;
     String city;
@@ -78,6 +78,14 @@ public class Hotel {
 
     public void setFoodDelivery(boolean foodDelivery) {
         this.foodDelivery = foodDelivery;
+    }
+
+    public int getHotelID() {
+        return hotelID;
+    }
+
+    public void setHotelID(int hotelID) {
+        this.hotelID = hotelID;
     }
     
     
