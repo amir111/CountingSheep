@@ -26,7 +26,7 @@ public class Login {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-            EventQueue.invokeLater(new Runnable() {
+		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Login window = new Login();
@@ -42,7 +42,7 @@ public class Login {
 	 * Create the application.
 	 */
 	public Login() {
-            initialize();
+		initialize();
 	}
 
 	/**
@@ -80,18 +80,25 @@ public class Login {
 		btnLogin.setFont(new Font("Arial Black", Font.PLAIN, 25));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                                //custom login user name and password
-                                String uname = usernamefield.getText();
+				//custom login user name and password
+				String uname = usernamefield.getText();
 				String pds = passwordfield.getText();
 				if(uname.equals("guest") && pds.equals("guest")) {
-					JOptionPane.showMessageDialog(frame, "You are logged in");
 					frame.dispose();
-					Guest guest1 = new Guest();
+					guestPortfolio guest1 = new guestPortfolio();
 					guest1.setVisible(true);
 					
+				}  else if(uname.equals("manager") && pds.equals("manager")) {
+					frame.dispose();
+					managerMain mm = new managerMain();
+					mm.setVisible(true);
+
 				} else {
-					JOptionPane.showMessageDialog(frame,"Incorrext Login Information");
+					JOptionPane.showMessageDialog(frame,"Incorrect Login Information");
+
 				}
+				 
+				
 				
 			}
 		});
