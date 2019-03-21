@@ -95,7 +95,7 @@ public class guestRequest extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(lblGuestRequest, "Request Submitted");
 				
-				Guest guest1 = new Guest();
+				guestPortfolio guest1 = new guestPortfolio();
 				guest1.setVisible(true);
 				close();
 			}
@@ -108,7 +108,7 @@ public class guestRequest extends JFrame {
 		btnGuestPortfolip.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		btnGuestPortfolip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Guest guest1 = new Guest();
+				guestPortfolio guest1 = new guestPortfolio();
 				guest1.setVisible(true);
 				close();
 			}
