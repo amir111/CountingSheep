@@ -306,10 +306,31 @@ public class DB {
         return deleted;
     }
     
-    //This method updates target room number within the manager's hotel
+    //This method updates target room number within the manager's hotel, this assume that either the description or the price is not null
     public static boolean updateRoom(int roomNumber,int hotelUuid,String description,float price){
-        //TO DO
-        return true;
+        boolean updated = false;
+        Connection conn = connect();
+        try {
+            Statement statement = conn.createStatement();
+            String sql;
+            if(description.isEmpty()){
+                sql = "update Room\nset price = '"+price+"'\nwhere number = '"+roomNumber+"' and hotel_id = '"+hotelUuid+"'";
+            }
+            else if(price == 0.0f){
+                sql = "update Room\nset description = '"+description+"'\nwhere number = '"+roomNumber+"' and hotel_id = '"+hotelUuid+"'";
+            }
+            else{
+                sql = "update Room\nset description = '"+description+"', price = '"+price+"'\nwhere number = '"+roomNumber+"' and hotel_id = '"+hotelUuid+"'";
+            }
+            int numUpdated = statement.executeUpdate(sql);
+            if (numUpdated > 0) {
+                updated = true;
+            }
+            conn.close();
+        } catch (Exception e) {
+            throw new IllegalStateException("", e);
+        }
+        return updated;
     }
     
     //This method sets target request as complete
@@ -331,13 +352,56 @@ public class DB {
     
     //This method changes target user's password
     public static boolean updateUserPassword(int UserUuid,String newPassword){
-        //TO DO
-        return true;
+        boolean updated = false;
+        Connection conn = connect();
+        try {
+            Statement statement = conn.createStatement();
+            int numUpdated = statement.executeUpdate("update User\nset password = '"+newPassword+"'\nwhere user_id = '"+UserUuid+"'");
+            if (numUpdated > 0) {
+                updated = true;
+            }
+            conn.close();
+        } catch (Exception e) {
+            throw new IllegalStateException("", e);
+        }
+        return updated;
     }
     
     //This method updates the manager's hotel's features
     public static boolean updateHotelFeatures(int hotelUuid,boolean breakfast,boolean pool,boolean foodDelivery){
-        //TO DO
-        return true;
+        boolean updated = false;
+        Connection conn = connect();
+        try {
+            Statement statement = conn.createStatement();
+            String sql = "update Hotel\nset";
+            if(breakfast){
+                sql += " breakfast = '"+1+"',";
+            }
+            else{
+                sql += " breakfast = '"+0+"',";
+            }
+            if(pool){
+                sql += " pool = '"+1+"',";
+            }
+            else{
+                sql += " pool = '"+0+"',";
+            }
+            if(foodDelivery){
+                sql += " food_delivery = '"+1+"',";
+            }
+            else{
+                sql += " food_delivery = '"+0+"',";
+            }
+            sql = sql.substring(0, sql.length()-1);
+            sql += "\nwhere hotel_id = '"+hotelUuid+"'";
+            int numUpdated = statement.executeUpdate(sql);
+            if (numUpdated > 0) {
+                updated = true;
+            }
+            conn.close();
+        } catch (Exception e) {
+            throw new IllegalStateException("", e);
+        }
+        return updated;
     }
 }
