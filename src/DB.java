@@ -198,6 +198,38 @@ public class DB {
         }
         return requests;
     }
+    
+    //TEST THIS PLS
+    //Returns a list of requests based on the manager and whether the requests are complete or not
+    public static ArrayList<PersonalRequest> selectRequestByManager(int managerUuid, boolean complete){
+        ArrayList<PersonalRequest> requests = new ArrayList<>();
+        Connection conn = connect();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs;
+            if(complete){
+                rs = statement.executeQuery("SELECT * FROM Request WHERE manager_id = "+managerUuid + " AND completion_time IS NOT NULL");
+            }
+            else{
+                rs = statement.executeQuery("SELECT * FROM Request WHERE manager_id = "+managerUuid + " AND completion_time IS NULL");
+            }
+            while (rs.next()) {
+                PersonalRequest newReq = new PersonalRequest();
+                newReq.setCategory(rs.getString("category"));
+                newReq.setCompletionTime(rs.getTimestamp("completion_time"));
+                newReq.setCreationTime(rs.getTimestamp("creation_time"));
+                newReq.setCustomerId(rs.getInt("customer_id"));
+                newReq.setDesc(rs.getString("description"));
+                newReq.setManagerId(rs.getInt("manager_id"));
+                newReq.setRequestId(rs.getInt("request_id"));
+                requests.add(newReq);
+            }
+            conn.close();
+        } catch (Exception e) {
+            throw new IllegalStateException("", e);
+        }
+        return requests;
+    }
 
     //Creates a request based on client desires, returns true if request was made, false if not
     public static boolean insertNewRequest(String desc, String category, int managerUuid, int clientUuid) {
@@ -236,12 +268,76 @@ public class DB {
         return inserted;
     }
     
-    /*
-    TO DO:
-    Insert new room by hotel id
-    Delete room by hotel id and room number
-    Update room by hotel id and room number
-    Select requests by hotel id and {complete/incomplete}
-    Update requests as complete
-    */
+    //
+    //TEST EVERYTHING BELOW HERE
+    //
+    //This method creates a new room based on manager input
+    public static boolean insertNewRoom(int roomNumber,String description,float price,int hotelUuid){
+        boolean inserted = false;
+        Connection conn = connect();
+        try {
+            Statement statement = conn.createStatement();
+            int uuid = getNewId("Room", statement);
+            int numInserted = statement.executeUpdate("insert into Room\n values('"+uuid+"','"+roomNumber+"','"+description+"','"+price+"','"+hotelUuid+"');");
+            if (numInserted > 0) {
+                inserted = true;
+            }
+            conn.close();
+        } catch (Exception e) {
+            throw new IllegalStateException("", e);
+        }
+        return inserted;
+    }
+    
+    //This method deletes a room within the manager's hotel
+    public static boolean deleteRoomByNumber(int roomNumber,int hotelUuid){
+        boolean deleted = false;
+        Connection conn = connect();
+        try {
+            Statement statement = conn.createStatement();
+            int numDeleted = statement.executeUpdate("delete from Room\n where number = '"+roomNumber+"' AND hotel_id = '"+hotelUuid+"');");
+            if (numDeleted > 0) {
+                deleted = true;
+            }
+            conn.close();
+        } catch (Exception e) {
+            throw new IllegalStateException("", e);
+        }
+        return deleted;
+    }
+    
+    //This method updates target room number within the manager's hotel
+    public static boolean updateRoom(int roomNumber,int hotelUuid,String description,float price){
+        //TO DO
+        return true;
+    }
+    
+    //This method sets target request as complete
+    public static boolean updateRequestAsComplete(int requestUuid){
+        boolean updated = false;
+        Connection conn = connect();
+        try {
+            Statement statement = conn.createStatement();
+            int numUpdated = statement.executeUpdate("update Request\nset completion_time = now()\nwhere request_id = '"+requestUuid+"'");
+            if (numUpdated > 0) {
+                updated = true;
+            }
+            conn.close();
+        } catch (Exception e) {
+            throw new IllegalStateException("", e);
+        }
+        return updated;
+    }
+    
+    //This method changes target user's password
+    public static boolean updateUserPassword(int UserUuid,String newPassword){
+        //TO DO
+        return true;
+    }
+    
+    //This method updates the manager's hotel's features
+    public static boolean updateHotelFeatures(int hotelUuid,boolean breakfast,boolean pool,boolean foodDelivery){
+        //TO DO
+        return true;
+    }
 }
