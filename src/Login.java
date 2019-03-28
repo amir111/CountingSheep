@@ -83,26 +83,14 @@ public class Login {
                                 //custom login user name and password
 				String uname = usernamefield.getText();
 				String pds = passwordfield.getText();
-				/*if(uname.equals("guest") && pds.equals("guest")) {
-					frame.dispose();
-					guestPortfolio guest1 = new guestPortfolio();
-					guest1.setVisible(true);
-					
-				}  else if(uname.equals("manager") && pds.equals("manager")) {
-					frame.dispose();
-					managerMain mm = new managerMain();
-					mm.setVisible(true);
-
-				} else {
-					JOptionPane.showMessageDialog(frame,"Incorrect Login Information");
-
-				}*/
-                                if(UserLogIn.checkLogIn(uname, pds)=='m'){
+                                if(UserLogIn.checkLogIn(uname, pds).ID=='M'){
+                                    User currentUser = UserLogIn.checkLogIn(uname, pds);
                                     frame.dispose();
 				    managerMain mm = new managerMain();
 			            mm.setVisible(true);
                                 }
-                                else if(UserLogIn.checkLogIn(uname, pds)=='g'){
+                                else if(UserLogIn.checkLogIn(uname, pds).ID=='C'){
+                                    User currentUser = UserLogIn.checkLogIn(uname, pds);
                                     frame.dispose();
                                     guestPortfolio guest1 = new guestPortfolio();
                                     guest1.setVisible(true);

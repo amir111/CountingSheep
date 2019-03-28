@@ -2,13 +2,19 @@
 
 public class UserLogIn{
 
- public static char checkLogIn(String username,String psword){
+ public static User checkLogIn(String username,String psword){
+        try{
         User user = DB.selectTargetUser(username);
         if (user.password.equals(psword)){
-            return user.ID;
+            return user;
         }
         else{
-            return 0;
+            return null;
         }
+        }
+        catch(Exception e){
+            return null;
+        }
+        
  }
 }
