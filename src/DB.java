@@ -199,7 +199,6 @@ public class DB {
         return requests;
     }
     
-    //TEST THIS PLS
     //Returns a list of requests based on the manager and whether the requests are complete or not
     public static ArrayList<PersonalRequest> selectRequestByManager(int managerUuid, boolean complete){
         ArrayList<PersonalRequest> requests = new ArrayList<>();
@@ -229,6 +228,41 @@ public class DB {
             throw new IllegalStateException("", e);
         }
         return requests;
+    }
+    
+    //Returns the hotel that a specific manager manages
+    public static Hotel selectHotelByManager(int managerUuid){
+        Hotel hotel = new Hotel();
+        Connection conn = connect();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Hotel WHERE manager_id = '"+managerUuid+"'");
+            if (rs.next()) {
+                hotel.setAddress(rs.getString("address"));
+                hotel.setCity(rs.getString("city"));
+                hotel.setName(rs.getString("name"));
+                hotel.setState("state");
+                if (rs.getInt("pool") == 1) {
+                    hotel.setPool(true);
+                } else {
+                    hotel.setPool(false);
+                }
+                if (rs.getInt("breakfast") == 1) {
+                    hotel.setBreakfast(true);
+                } else {
+                    hotel.setBreakfast(false);
+                }
+                if (rs.getInt("food_delivery") == 1) {
+                    hotel.setFoodDelivery(true);
+                } else {
+                    hotel.setFoodDelivery(false);
+                }
+            }
+            conn.close();
+        } catch (Exception e) {
+            throw new IllegalStateException("", e);
+        }
+        return hotel;
     }
 
     //Creates a request based on client desires, returns true if request was made, false if not
@@ -268,9 +302,6 @@ public class DB {
         return inserted;
     }
     
-    //
-    //TEST EVERYTHING BELOW HERE
-    //
     //This method creates a new room based on manager input
     public static boolean insertNewRoom(int roomNumber,String description,float price,int hotelUuid){
         boolean inserted = false;
@@ -295,7 +326,7 @@ public class DB {
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
-            int numDeleted = statement.executeUpdate("delete from Room\n where number = '"+roomNumber+"' AND hotel_id = '"+hotelUuid+"');");
+            int numDeleted = statement.executeUpdate("delete from Room\n where number = '"+roomNumber+"' AND hotel_id = '"+hotelUuid+"'");
             if (numDeleted > 0) {
                 deleted = true;
             }
@@ -356,7 +387,7 @@ public class DB {
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
-            int numUpdated = statement.executeUpdate("update User\nset password = '"+newPassword+"'\nwhere user_id = '"+UserUuid+"'");
+            int numUpdated = statement.executeUpdate("update User\nset pword = '"+newPassword+"'\nwhere user_id = '"+UserUuid+"'");
             if (numUpdated > 0) {
                 updated = true;
             }
