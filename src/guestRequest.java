@@ -20,6 +20,7 @@ public class guestRequest extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+        static User currentUser;
 
 	/**
 	 * Launch the application.
@@ -28,7 +29,7 @@ public class guestRequest extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					guestRequest frame = new guestRequest();
+					guestRequest frame = new guestRequest(currentUser);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +45,8 @@ public class guestRequest extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public guestRequest() {
+	public guestRequest(User user) {
+                currentUser = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 476 );
 		contentPane = new JPanel();
@@ -95,7 +97,7 @@ public class guestRequest extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(lblGuestRequest, "Request Submitted");
 				
-				guestPortfolio guest1 = new guestPortfolio();
+				guestPortfolio guest1 = new guestPortfolio(currentUser);
 				guest1.setVisible(true);
 				close();
 			}
@@ -108,7 +110,7 @@ public class guestRequest extends JFrame {
 		btnGuestPortfolip.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		btnGuestPortfolip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				guestPortfolio guest1 = new guestPortfolio();
+				guestPortfolio guest1 = new guestPortfolio(currentUser);
 				guest1.setVisible(true);
 				close();
 			}

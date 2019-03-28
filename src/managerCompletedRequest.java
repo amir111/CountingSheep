@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 public class managerCompletedRequest extends JFrame {
 
 	private JPanel contentPane;
+        static User currentUser;
 
 	/**
 	 * Launch the application.
@@ -23,7 +24,7 @@ public class managerCompletedRequest extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					managerCompletedRequest frame = new managerCompletedRequest();
+					managerCompletedRequest frame = new managerCompletedRequest(currentUser);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +40,8 @@ public class managerCompletedRequest extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public managerCompletedRequest() {
+	public managerCompletedRequest(User user) {
+                currentUser = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 476);
 		contentPane = new JPanel();
@@ -56,7 +58,7 @@ public class managerCompletedRequest extends JFrame {
 		JButton btnCloseApplication = new JButton("Main Menu\r\n");
 		btnCloseApplication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				managerRequest mrm = new managerRequest();
+				managerRequest mrm = new managerRequest(currentUser);
 				mrm.setVisible(true);
 				close();
 

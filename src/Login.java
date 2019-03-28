@@ -84,15 +84,15 @@ public class Login {
 				String uname = usernamefield.getText();
 				String pds = passwordfield.getText();
                                 if(UserLogIn.checkLogIn(uname, pds).ID=='M'){
-                                    User currentUser = UserLogIn.checkLogIn(uname, pds);
+                                    User currentUser = DB.selectTargetUser(uname);
                                     frame.dispose();
-				    managerMain mm = new managerMain();
+				    managerMain mm = new managerMain(currentUser);
 			            mm.setVisible(true);
                                 }
                                 else if(UserLogIn.checkLogIn(uname, pds).ID=='C'){
-                                    User currentUser = UserLogIn.checkLogIn(uname, pds);
+                                    User currentUser = DB.selectTargetUser(uname);
                                     frame.dispose();
-                                    guestPortfolio guest1 = new guestPortfolio();
+                                    guestPortfolio guest1 = new guestPortfolio(currentUser);
                                     guest1.setVisible(true);
                                 }
                                 else{
