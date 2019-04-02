@@ -19,9 +19,7 @@ public class managerAddRoom extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
 	private JTextField textField_3;
-	private JTextField textField_4;
         static User currentUser;
 
 	/**
@@ -86,20 +84,14 @@ public class managerAddRoom extends JFrame {
 		lblRoomCost.setBounds(71, 195, 150, 32);
 		contentPane.add(lblRoomCost);
 		
-		JLabel lblCity = new JLabel("City \r\n");
-		lblCity.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		lblCity.setBounds(71, 239, 116, 32);
-		contentPane.add(lblCity);
+		
 		
 		JLabel lblFeatures = new JLabel("Features \r\n");
 		lblFeatures.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		lblFeatures.setBounds(418, 139, 116, 32);
 		contentPane.add(lblFeatures);
 		
-		JLabel lblRatings = new JLabel("Ratings\r\n");
-		lblRatings.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		lblRatings.setBounds(418, 206, 116, 32);
-		contentPane.add(lblRatings);
+		
 		
 		textField = new JTextField();
 		textField.setBounds(199, 142, 137, 32);
@@ -111,20 +103,14 @@ public class managerAddRoom extends JFrame {
 		textField_1.setBounds(199, 187, 137, 32);
 		contentPane.add(textField_1);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(199, 239, 137, 32);
-		contentPane.add(textField_2);
+		
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
 		textField_3.setBounds(546, 139, 137, 32);
 		contentPane.add(textField_3);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(546, 203, 137, 32);
-		contentPane.add(textField_4);
+		
 		
 		JButton btnSubmit = new JButton("SUBMIT\r\n");
 		btnSubmit.addActionListener(new ActionListener() {
