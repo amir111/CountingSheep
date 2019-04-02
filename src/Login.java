@@ -83,6 +83,7 @@ public class Login {
                                 //custom login user name and password
 				String uname = usernamefield.getText();
 				String pds = passwordfield.getText();
+                                try{
                                 if(UserLogIn.checkLogIn(uname, pds).ID=='M'){
                                     User currentUser = DB.selectTargetUser(uname);
                                     frame.dispose();
@@ -96,6 +97,10 @@ public class Login {
                                     guest1.setVisible(true);
                                 }
                                 else{
+                                    throw new NullPointerException();
+                                }
+                                }
+                                catch(NullPointerException npe){
                                     JOptionPane.showMessageDialog(frame,"Incorrect Login Information");
                                 }
 			}

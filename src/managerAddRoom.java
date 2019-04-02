@@ -129,9 +129,14 @@ public class managerAddRoom extends JFrame {
 		JButton btnSubmit = new JButton("SUBMIT\r\n");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                                //RoomManagement.AddRoom();
-                                //DB.insertNewRoom(int rmNum,String descript, float price,)
-				JOptionPane.showMessageDialog(btnCloseApplication,"Room Submitted");
+                                int roomID = Integer.valueOf(textField.getText().trim()).intValue();
+                                float roomCost = Float.valueOf(textField_1.getText().trim()).floatValue();
+                                String city = textField_2.getText().trim();
+                                String features = textField_3.getText().trim();
+                                float rating = Float.valueOf(textField_4.getText().trim()).floatValue();
+                                DB.insertNewRoom(roomID, features, roomCost,user.uuid);
+                                
+				JOptionPane.showMessageDialog(btnCloseApplication,"Room Added");
 				managerRoomMod mrm = new managerRoomMod(currentUser);
 				mrm.setVisible(true);
 				close();
