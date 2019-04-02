@@ -43,7 +43,7 @@ public class managerDeleteRoom extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public managerDeleteRoom(User user) {
+	public managerDeleteRoom( final User user) {
                 currentUser = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 476);
@@ -58,7 +58,7 @@ public class managerDeleteRoom extends JFrame {
 		lblNewLabel.setBounds(177, 13, 427, 103);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnCloseApplication = new JButton("Previous Menu\r\n");
+		final JButton btnCloseApplication = new JButton("Previous Menu\r\n");
 		btnCloseApplication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				managerRoomMod mrm = new managerRoomMod(currentUser);
@@ -81,6 +81,8 @@ public class managerDeleteRoom extends JFrame {
 		JButton btnSubmit = new JButton("Delete Room");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+                                int roomNum = Integer.valueOf(textField.getText().trim()).intValue();
+                                DB.deleteRoomByNumber(roomNum, user.uuid);
 				JOptionPane.showMessageDialog(btnCloseApplication,"Room Deleted");
 				managerRoomMod mrm = new managerRoomMod(currentUser);
 				mrm.setVisible(true);
