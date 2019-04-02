@@ -45,7 +45,7 @@ public class managerAddRoom extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public managerAddRoom(User user) {
+	public managerAddRoom(final User user) {
                 currentUser = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 476);
@@ -60,7 +60,7 @@ public class managerAddRoom extends JFrame {
 		lblNewLabel.setBounds(177, 13, 427, 103);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnCloseApplication = new JButton("Previous Menu\r\n");
+		final JButton btnCloseApplication = new JButton("Previous Menu\r\n");
 		btnCloseApplication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				managerRoomMod mrm = new managerRoomMod(currentUser);
@@ -117,9 +117,7 @@ public class managerAddRoom extends JFrame {
 			public void actionPerformed(ActionEvent e) {
                                 int roomID = Integer.valueOf(textField.getText().trim()).intValue();
                                 float roomCost = Float.valueOf(textField_1.getText().trim()).floatValue();
-                                String city = textField_2.getText().trim();
                                 String features = textField_3.getText().trim();
-                                float rating = Float.valueOf(textField_4.getText().trim()).floatValue();
                                 DB.insertNewRoom(roomID, features, roomCost,user.uuid);
                                 
 				JOptionPane.showMessageDialog(btnCloseApplication,"Room Added");
