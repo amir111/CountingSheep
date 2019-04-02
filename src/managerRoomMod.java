@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 public class managerRoomMod extends JFrame {
 
 	private JPanel contentPane;
+        static User currentUser;
 
 	/**
 	 * Launch the application.
@@ -23,7 +24,7 @@ public class managerRoomMod extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					managerRoomMod frame = new managerRoomMod();
+					managerRoomMod frame = new managerRoomMod(currentUser);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +40,8 @@ public class managerRoomMod extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public managerRoomMod() {
+	public managerRoomMod(User user) {
+                currentUser = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 476);
 		contentPane = new JPanel();
@@ -57,7 +59,7 @@ public class managerRoomMod extends JFrame {
 		btnRoomModificaton.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		btnRoomModificaton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				managerAddRoom mar = new managerAddRoom();
+				managerAddRoom mar = new managerAddRoom(currentUser);
 				mar.setVisible(true);
 				close();
 				
@@ -69,7 +71,7 @@ public class managerRoomMod extends JFrame {
 		JButton btnCloseApplication = new JButton("Main Menu");
 		btnCloseApplication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				managerMain mm = new managerMain();
+				managerMain mm = new managerMain(currentUser);
 				mm.setVisible(true);
 				close();
 
@@ -83,7 +85,7 @@ public class managerRoomMod extends JFrame {
 		JButton btnDeleteRoom = new JButton("Delete Room\r\n");
 		btnDeleteRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				managerDeleteRoom mdr = new managerDeleteRoom();
+				managerDeleteRoom mdr = new managerDeleteRoom(currentUser);
 				mdr.setVisible(true);
 				close();
 			}
@@ -95,7 +97,7 @@ public class managerRoomMod extends JFrame {
 		JButton btnModifyRoom = new JButton("Modify/View Rooms\r\n");
 		btnModifyRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				managerModViewRooms mdr = new managerModViewRooms();
+				managerModViewRooms mdr = new managerModViewRooms(currentUser);
 				mdr.setVisible(true);
 				close();
 			}

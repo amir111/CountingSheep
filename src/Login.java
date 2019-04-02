@@ -83,23 +83,21 @@ public class Login {
                                 //custom login user name and password
 				String uname = usernamefield.getText();
 				String pds = passwordfield.getText();
-				if(uname.equals("guest") && pds.equals("guest")) {
-					frame.dispose();
-					guestPortfolio guest1 = new guestPortfolio();
-					guest1.setVisible(true);
-					
-				}  else if(uname.equals("manager") && pds.equals("manager")) {
-					frame.dispose();
-					managerMain mm = new managerMain();
-					mm.setVisible(true);
-
-				} else {
-					JOptionPane.showMessageDialog(frame,"Incorrect Login Information");
-
-				}
-				 
-				
-				
+                                if(UserLogIn.checkLogIn(uname, pds).ID=='M'){
+                                    User currentUser = DB.selectTargetUser(uname);
+                                    frame.dispose();
+				    managerMain mm = new managerMain(currentUser);
+			            mm.setVisible(true);
+                                }
+                                else if(UserLogIn.checkLogIn(uname, pds).ID=='C'){
+                                    User currentUser = DB.selectTargetUser(uname);
+                                    frame.dispose();
+                                    guestPortfolio guest1 = new guestPortfolio(currentUser);
+                                    guest1.setVisible(true);
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(frame,"Incorrect Login Information");
+                                }
 			}
 		});
 		btnLogin.setBounds(279, 343, 287, 62);

@@ -22,6 +22,7 @@ public class managerRoomModify extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+        static User currentUser;
 
 	/**
 	 * Launch the application.
@@ -30,7 +31,7 @@ public class managerRoomModify extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					managerRoomModify frame = new managerRoomModify();
+					managerRoomModify frame = new managerRoomModify(currentUser);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,7 +47,8 @@ public class managerRoomModify extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public managerRoomModify() {
+	public managerRoomModify(User user) {
+                currentUser = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 775, 571);
 		contentPane = new JPanel();
@@ -63,7 +65,7 @@ public class managerRoomModify extends JFrame {
 		JButton btnCloseApplication = new JButton("Previous Menu\r\n");
 		btnCloseApplication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				managerRoomMod mrm = new managerRoomMod();
+				managerRoomMod mrm = new managerRoomMod(currentUser);
 				mrm.setVisible(true);
 				close();
 
@@ -105,7 +107,7 @@ public class managerRoomModify extends JFrame {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(btnCloseApplication,"Room Updated");
-				managerModViewRooms mrm = new managerModViewRooms();
+				managerModViewRooms mrm = new managerModViewRooms(currentUser);
 				mrm.setVisible(true);
 				close();
 				

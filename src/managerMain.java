@@ -14,15 +14,16 @@ import java.awt.Color;
 public class managerMain extends JFrame {
 
 	private JPanel contentPane;
-
+        static User currentUser;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+            
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					managerMain frame = new managerMain();
+					managerMain frame = new managerMain(currentUser);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +40,8 @@ public class managerMain extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public managerMain() {
+	public managerMain(User user) {
+                currentUser = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 476);
 		contentPane = new JPanel();
@@ -57,7 +59,7 @@ public class managerMain extends JFrame {
 		btnRoomModificaton.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		btnRoomModificaton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				managerRoomMod mrm = new managerRoomMod();
+				managerRoomMod mrm = new managerRoomMod(currentUser);
 				mrm.setVisible(true);
 				close();
 				
@@ -69,7 +71,7 @@ public class managerMain extends JFrame {
 		JButton btnRequest = new JButton("Request \r\n");
 		btnRequest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				managerRequest mrm = new managerRequest();
+				managerRequest mrm = new managerRequest(currentUser);
 				mrm.setVisible(true);
 				close();
 				

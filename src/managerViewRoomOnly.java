@@ -47,6 +47,7 @@ public class managerViewRoomOnly extends JFrame {
 	private JTextField textField_27;
 	private JTextField textField_28;
 	private JTextField textField_29;
+        static User currentUser;
 
 	/**
 	 * Launch the application.
@@ -55,7 +56,7 @@ public class managerViewRoomOnly extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					managerViewRoomOnly frame = new managerViewRoomOnly();
+					managerViewRoomOnly frame = new managerViewRoomOnly(currentUser);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -70,7 +71,8 @@ public class managerViewRoomOnly extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public managerViewRoomOnly() {
+	public managerViewRoomOnly(User user) {
+                currentUser = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1366, 994);
 		contentPane = new JPanel();
@@ -87,7 +89,7 @@ public class managerViewRoomOnly extends JFrame {
 		JButton btnCloseApplication = new JButton("Main Menu");
 		btnCloseApplication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				managerModViewRooms mrm = new managerModViewRooms();
+				managerModViewRooms mrm = new managerModViewRooms(currentUser);
 				mrm.setVisible(true);
 				close();
 
