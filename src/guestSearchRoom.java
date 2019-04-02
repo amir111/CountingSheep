@@ -18,6 +18,7 @@ public class guestSearchRoom extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
+        static User currentUser;
 
 	/**
 	 * Launch the application.
@@ -26,7 +27,7 @@ public class guestSearchRoom extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					guestSearchRoom frame = new guestSearchRoom();
+					guestSearchRoom frame = new guestSearchRoom(currentUser);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +43,8 @@ public class guestSearchRoom extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public guestSearchRoom() {
+	public guestSearchRoom(User user) {
+                currentUser = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 476);
 		contentPane = new JPanel();
@@ -64,7 +66,7 @@ public class guestSearchRoom extends JFrame {
 		btnPreviousMenu.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		btnPreviousMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				guestPortfolio guest1 = new guestPortfolio();
+				guestPortfolio guest1 = new guestPortfolio(currentUser);
 				guest1.setVisible(true);
 				close();
 			}
@@ -96,7 +98,7 @@ public class guestSearchRoom extends JFrame {
 		btnSearch.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				guestBookRoom broom = new guestBookRoom();
+				guestBookRoom broom = new guestBookRoom(currentUser);
 				broom.setVisible(true);
 				close();
 			}

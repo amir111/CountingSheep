@@ -22,15 +22,17 @@ public class managerAddRoom extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+        static User currentUser;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+            
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					managerAddRoom frame = new managerAddRoom();
+					managerAddRoom frame = new managerAddRoom(currentUser);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +47,8 @@ public class managerAddRoom extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public managerAddRoom() {
+	public managerAddRoom(User user) {
+                currentUser = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 476);
 		contentPane = new JPanel();
@@ -62,7 +65,7 @@ public class managerAddRoom extends JFrame {
 		JButton btnCloseApplication = new JButton("Previous Menu\r\n");
 		btnCloseApplication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				managerRoomMod mrm = new managerRoomMod();
+				managerRoomMod mrm = new managerRoomMod(currentUser);
 				mrm.setVisible(true);
 				close();
 
@@ -126,8 +129,10 @@ public class managerAddRoom extends JFrame {
 		JButton btnSubmit = new JButton("SUBMIT\r\n");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+                                //RoomManagement.AddRoom();
+                                //DB.insertNewRoom(int rmNum,String descript, float price,)
 				JOptionPane.showMessageDialog(btnCloseApplication,"Room Submitted");
-				managerRoomMod mrm = new managerRoomMod();
+				managerRoomMod mrm = new managerRoomMod(currentUser);
 				mrm.setVisible(true);
 				close();
 				

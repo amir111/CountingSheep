@@ -16,6 +16,7 @@ import javax.swing.JCheckBox;
 public class managerIncompleteRequest extends JFrame {
 
 	private JPanel contentPane;
+        static User currentUser;
 
 	/**
 	 * Launch the application.
@@ -24,7 +25,7 @@ public class managerIncompleteRequest extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					managerIncompleteRequest frame = new managerIncompleteRequest();
+					managerIncompleteRequest frame = new managerIncompleteRequest(currentUser);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +41,8 @@ public class managerIncompleteRequest extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public managerIncompleteRequest() {
+	public managerIncompleteRequest(User user) {
+                currentUser = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 476);
 		contentPane = new JPanel();
@@ -57,7 +59,7 @@ public class managerIncompleteRequest extends JFrame {
 		JButton btnCloseApplication = new JButton("Main Menu\r\n");
 		btnCloseApplication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				managerRequest mrm = new managerRequest();
+				managerRequest mrm = new managerRequest(currentUser);
 				mrm.setVisible(true);
 				close();
 
