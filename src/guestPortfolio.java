@@ -50,7 +50,7 @@ public class guestPortfolio extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblGuetProtfolio = new JLabel("Guest Protfolio");
+		JLabel lblGuetProtfolio = new JLabel("Guest Portfolio");
 		lblGuetProtfolio.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 90));
 		lblGuetProtfolio.setBounds(62, 0, 744, 92);
 		contentPane.add(lblGuetProtfolio);
