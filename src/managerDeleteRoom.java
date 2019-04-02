@@ -81,8 +81,8 @@ public class managerDeleteRoom extends JFrame {
 		JButton btnSubmit = new JButton("Delete Room");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                                int roomNumber = Integer.valueOf(textField.getText().trim()).intValue();
-                                DB.deleteRoomByNumber(roomNumber, user.uuid);
+                                int roomNum = Integer.valueOf(textField.getText().trim()).intValue();
+                                DB.deleteRoomByNumber(roomNum, user.uuid);
 				JOptionPane.showMessageDialog(btnCloseApplication,"Room Deleted");
 				managerRoomMod mrm = new managerRoomMod(currentUser);
 				mrm.setVisible(true);
