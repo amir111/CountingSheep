@@ -60,7 +60,7 @@ public class DB {
     }
 
     //Returns a list of rooms booked by a specific client identified by their uuid
-    public static ArrayList<Room> selectBookedRoom(int clientUuid) {
+    public static ArrayList<Room> selectBookedRooms(int clientUuid) {
         ArrayList<Room> roomList = new ArrayList<>();
         Connection conn = connect();
         try {
@@ -175,7 +175,7 @@ public class DB {
     
     //NOTE: Timestamps a little buggy but it does contain all important information thats in the database
     //Returns a list of requests made by a specific client
-    public static ArrayList<PersonalRequest> selectRequestByClient(int clientUuid){
+    public static ArrayList<PersonalRequest> selectRequestsByClient(int clientUuid){
         ArrayList<PersonalRequest> requests = new ArrayList<>();
         Connection conn = connect();
         try {
@@ -200,7 +200,7 @@ public class DB {
     }
     
     //Returns a list of requests based on the manager and whether the requests are complete or not
-    public static ArrayList<PersonalRequest> selectRequestByManager(int managerUuid, boolean complete){
+    public static ArrayList<PersonalRequest> selectRequestsByManager(int managerUuid, boolean complete){
         ArrayList<PersonalRequest> requests = new ArrayList<>();
         Connection conn = connect();
         try {
@@ -303,13 +303,14 @@ public class DB {
     }
     
     //This method creates a new room based on manager input
-    public static boolean insertNewRoom(int roomNumber,String description,float price,int hotelUuid){
+    public static boolean insertNewRoom(int roomNumber,String description,float price,int userUuid){
         boolean inserted = false;
+        Hotel hotel = DB.selectHotelByManager(userUuid);
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
             int uuid = getNewId("Room", statement);
-            int numInserted = statement.executeUpdate("insert into Room\n values('"+uuid+"','"+roomNumber+"','"+description+"','"+price+"','"+hotelUuid+"');");
+            int numInserted = statement.executeUpdate("insert into Room\n values('"+uuid+"','"+roomNumber+"','"+description+"','"+price+"','"+hotel.getHotelID()+"');");
             if (numInserted > 0) {
                 inserted = true;
             }
@@ -321,12 +322,13 @@ public class DB {
     }
     
     //This method deletes a room within the manager's hotel
-    public static boolean deleteRoomByNumber(int roomNumber,int hotelUuid){
+    public static boolean deleteRoomByNumber(int roomNumber,int userUuid){
         boolean deleted = false;
+        Hotel hotel = DB.selectHotelByManager(userUuid);
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
-            int numDeleted = statement.executeUpdate("delete from Room\n where number = '"+roomNumber+"' AND hotel_id = '"+hotelUuid+"'");
+            int numDeleted = statement.executeUpdate("delete from Room\n where number = '"+roomNumber+"' AND hotel_id = '"+hotel.getHotelID()+"'");
             if (numDeleted > 0) {
                 deleted = true;
             }
@@ -338,20 +340,21 @@ public class DB {
     }
     
     //This method updates target room number within the manager's hotel, this assume that either the description or the price is not null
-    public static boolean updateRoom(int roomNumber,int hotelUuid,String description,float price){
+    public static boolean updateRoom(int roomNumber,int userUuid,String description,float price){
         boolean updated = false;
+        Hotel hotel = DB.selectHotelByManager(userUuid);
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
             String sql;
             if(description.isEmpty()){
-                sql = "update Room\nset price = '"+price+"'\nwhere number = '"+roomNumber+"' and hotel_id = '"+hotelUuid+"'";
+                sql = "update Room\nset price = '"+price+"'\nwhere number = '"+roomNumber+"' and hotel_id = '"+hotel.getHotelID()+"'";
             }
             else if(price == 0.0f){
-                sql = "update Room\nset description = '"+description+"'\nwhere number = '"+roomNumber+"' and hotel_id = '"+hotelUuid+"'";
+                sql = "update Room\nset description = '"+description+"'\nwhere number = '"+roomNumber+"' and hotel_id = '"+hotel.getHotelID()+"'";
             }
             else{
-                sql = "update Room\nset description = '"+description+"', price = '"+price+"'\nwhere number = '"+roomNumber+"' and hotel_id = '"+hotelUuid+"'";
+                sql = "update Room\nset description = '"+description+"', price = '"+price+"'\nwhere number = '"+roomNumber+"' and hotel_id = '"+hotel.getHotelID()+"'";
             }
             int numUpdated = statement.executeUpdate(sql);
             if (numUpdated > 0) {
@@ -399,8 +402,9 @@ public class DB {
     }
     
     //This method updates the manager's hotel's features
-    public static boolean updateHotelFeatures(int hotelUuid,boolean breakfast,boolean pool,boolean foodDelivery){
+    public static boolean updateHotelFeatures(int userUuid,boolean breakfast,boolean pool,boolean foodDelivery){
         boolean updated = false;
+        Hotel hotel = DB.selectHotelByManager(userUuid);
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
@@ -424,7 +428,7 @@ public class DB {
                 sql += " food_delivery = '"+0+"',";
             }
             sql = sql.substring(0, sql.length()-1);
-            sql += "\nwhere hotel_id = '"+hotelUuid+"'";
+            sql += "\nwhere hotel_id = '"+hotel.getHotelID()+"'";
             int numUpdated = statement.executeUpdate(sql);
             if (numUpdated > 0) {
                 updated = true;
