@@ -15,7 +15,7 @@ import java.awt.Color;
 public class guestPortfolio extends JFrame {
 
 	private JPanel contentPane;
-
+        public static User currentUser;
 	/**
 	 * Launch the application.
 	 */
@@ -23,7 +23,7 @@ public class guestPortfolio extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					guestPortfolio frame = new guestPortfolio();
+					guestPortfolio frame = new guestPortfolio(currentUser);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +40,8 @@ public class guestPortfolio extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public guestPortfolio() {
+	public guestPortfolio(User user) {
+                currentUser = user; 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 476);
 		contentPane = new JPanel();
@@ -74,7 +75,7 @@ public class guestPortfolio extends JFrame {
 		btnBookingInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//Guest.Dispose();
-				guestBookingInfo bookinfo = new guestBookingInfo();
+				guestBookingInfo bookinfo = new guestBookingInfo(currentUser);
 				bookinfo.setVisible(true);
 				close();
 				
@@ -88,7 +89,7 @@ public class guestPortfolio extends JFrame {
 		btnBookRoom.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		btnBookRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				guestSearchRoom sroom = new guestSearchRoom();
+				guestSearchRoom sroom = new guestSearchRoom(currentUser);
 				sroom.setVisible(true);
 				close();
 				
@@ -102,7 +103,7 @@ public class guestPortfolio extends JFrame {
 		btnRequest.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		btnRequest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				guestRequest greq = new guestRequest();
+				guestRequest greq = new guestRequest(currentUser);
 				greq.setVisible(true);
 				close();
 			}

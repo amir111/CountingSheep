@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 public class managerRequest extends JFrame {
 
 	private JPanel contentPane;
+        static User currentUser;
 
 	/**
 	 * Launch the application.
@@ -23,7 +24,7 @@ public class managerRequest extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					managerRequest frame = new managerRequest();
+					managerRequest frame = new managerRequest(currentUser);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +41,8 @@ public class managerRequest extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public managerRequest() {
+	public managerRequest(User user) {
+                currentUser = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 476);
 		contentPane = new JPanel();
@@ -58,7 +60,7 @@ public class managerRequest extends JFrame {
 		btnRoomModificaton.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		btnRoomModificaton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				managerCompletedRequest mrm = new managerCompletedRequest();
+				managerCompletedRequest mrm = new managerCompletedRequest(currentUser);
 				mrm.setVisible(true);
 				close();
 				
@@ -70,7 +72,7 @@ public class managerRequest extends JFrame {
 		JButton btnRequest = new JButton("Incomplete\r\n");
 		btnRequest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				managerIncompleteRequest mrm = new managerIncompleteRequest();
+				managerIncompleteRequest mrm = new managerIncompleteRequest(currentUser);
 				mrm.setVisible(true);
 				close();
 				
@@ -83,7 +85,7 @@ public class managerRequest extends JFrame {
 		JButton btnCloseApplication = new JButton("Main Menu\r\n");
 		btnCloseApplication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				managerMain mrm = new managerMain();
+				managerMain mrm = new managerMain(currentUser);
 				mrm.setVisible(true);
 				close();
 

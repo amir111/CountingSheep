@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 public class managerModViewRooms extends JFrame {
 
 	private JPanel contentPane;
+        static User currentUser;
 
 	/**
 	 * Launch the application.
@@ -25,7 +26,7 @@ public class managerModViewRooms extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					managerModViewRooms frame = new managerModViewRooms();
+					managerModViewRooms frame = new managerModViewRooms(currentUser);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +42,8 @@ public class managerModViewRooms extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public managerModViewRooms() {
+	public managerModViewRooms(User user) {
+                currentUser = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 476);
 		contentPane = new JPanel();
@@ -58,7 +60,7 @@ public class managerModViewRooms extends JFrame {
 		JButton btnCloseApplication = new JButton("Previous Menu\r\n");
 		btnCloseApplication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				managerRoomMod mrm = new managerRoomMod();
+				managerRoomMod mrm = new managerRoomMod(currentUser);
 				mrm.setVisible(true);
 				close();
 
@@ -73,7 +75,7 @@ public class managerModViewRooms extends JFrame {
 		JButton btnSubmit = new JButton("View Room\r\n");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				managerViewRoomOnly mrm = new managerViewRoomOnly();
+				managerViewRoomOnly mrm = new managerViewRoomOnly(currentUser);
 				mrm.setVisible(true);
 				close();
 				
@@ -88,7 +90,7 @@ public class managerModViewRooms extends JFrame {
 		JButton btnModifyRoom = new JButton("Modify Room\r\n");
 		btnModifyRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				managerRoomModify mrm = new managerRoomModify();
+				managerRoomModify mrm = new managerRoomModify(currentUser);
 				mrm.setVisible(true);
 				close();
 				

@@ -18,6 +18,7 @@ public class managerDeleteRoom extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
+        static User currentUser;
 
 	/**
 	 * Launch the application.
@@ -26,7 +27,7 @@ public class managerDeleteRoom extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					managerDeleteRoom frame = new managerDeleteRoom();
+					managerDeleteRoom frame = new managerDeleteRoom(currentUser);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +43,8 @@ public class managerDeleteRoom extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public managerDeleteRoom() {
+	public managerDeleteRoom(User user) {
+                currentUser = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 476);
 		contentPane = new JPanel();
@@ -59,7 +61,7 @@ public class managerDeleteRoom extends JFrame {
 		JButton btnCloseApplication = new JButton("Previous Menu\r\n");
 		btnCloseApplication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				managerRoomMod mrm = new managerRoomMod();
+				managerRoomMod mrm = new managerRoomMod(currentUser);
 				mrm.setVisible(true);
 				close();
 
@@ -80,7 +82,7 @@ public class managerDeleteRoom extends JFrame {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(btnCloseApplication,"Room Deleted");
-				managerRoomMod mrm = new managerRoomMod();
+				managerRoomMod mrm = new managerRoomMod(currentUser);
 				mrm.setVisible(true);
 				close();
 				

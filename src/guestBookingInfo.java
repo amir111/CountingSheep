@@ -26,6 +26,7 @@ public class guestBookingInfo extends JFrame {
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTextField textField_6;
+        static User currentUser;
 
 	/**
 	 * Launch the application.
@@ -34,7 +35,7 @@ public class guestBookingInfo extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					guestBookingInfo frame = new guestBookingInfo();
+					guestBookingInfo frame = new guestBookingInfo(currentUser);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +50,8 @@ public class guestBookingInfo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public guestBookingInfo() {
+	public guestBookingInfo(User user) {
+                currentUser = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 476);
 		contentPane = new JPanel();
@@ -64,7 +66,7 @@ public class guestBookingInfo extends JFrame {
 		btnGoBackTo.setForeground(Color.RED);
 		btnGoBackTo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				guestPortfolio guest1 = new guestPortfolio();
+				guestPortfolio guest1 = new guestPortfolio(currentUser);
 				guest1.setVisible(true);
 				close();
 				

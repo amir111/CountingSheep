@@ -18,6 +18,7 @@ import java.awt.Color;
 public class guestBookRoom extends JFrame {
 
 	private JPanel contentPane;
+        static User currentUser;
 
 	/**
 	 * Launch the application.
@@ -26,7 +27,7 @@ public class guestBookRoom extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					guestBookRoom frame = new guestBookRoom();
+					guestBookRoom frame = new guestBookRoom(currentUser);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +43,8 @@ public class guestBookRoom extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public guestBookRoom() {
+	public guestBookRoom(User user) {
+                currentUser = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1071, 900);
 		contentPane = new JPanel();
@@ -62,7 +64,7 @@ public class guestBookRoom extends JFrame {
 		btnGuestPortfolio.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		btnGuestPortfolio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				guestSearchRoom sroom = new guestSearchRoom();
+				guestSearchRoom sroom = new guestSearchRoom(currentUser);
 				sroom.setVisible(true);
 				close();
 				
@@ -99,7 +101,7 @@ public class guestBookRoom extends JFrame {
 		button_5.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		button_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				guestFinalBooking fbook = new guestFinalBooking();
+				guestFinalBooking fbook = new guestFinalBooking(currentUser);
 				fbook.setVisible(true);
 				close();
 			}
@@ -164,7 +166,7 @@ public class guestBookRoom extends JFrame {
 		JButton button = new JButton("Book");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				guestFinalBooking fbook = new guestFinalBooking();
+				guestFinalBooking fbook = new guestFinalBooking(currentUser);
 				fbook.setVisible(true);
 				close();
 			}
@@ -225,7 +227,7 @@ public class guestBookRoom extends JFrame {
 		JButton button_1 = new JButton("Book");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				guestFinalBooking fbook = new guestFinalBooking();
+				guestFinalBooking fbook = new guestFinalBooking(currentUser);
 				fbook.setVisible(true);
 				close();
 			}
@@ -286,7 +288,7 @@ public class guestBookRoom extends JFrame {
 		JButton button_2 = new JButton("Book");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				guestFinalBooking fbook = new guestFinalBooking();
+				guestFinalBooking fbook = new guestFinalBooking(currentUser);
 				fbook.setVisible(true);
 				close();
 			}
@@ -347,7 +349,7 @@ public class guestBookRoom extends JFrame {
 		JButton button_3 = new JButton("Book");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				guestFinalBooking fbook = new guestFinalBooking();
+				guestFinalBooking fbook = new guestFinalBooking(currentUser);
 				fbook.setVisible(true);
 				close();
 			}
@@ -408,7 +410,7 @@ public class guestBookRoom extends JFrame {
 		JButton button_4 = new JButton("Book");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				guestFinalBooking fbook = new guestFinalBooking();
+				guestFinalBooking fbook = new guestFinalBooking(currentUser);
 				fbook.setVisible(true);
 				close();
 			}
