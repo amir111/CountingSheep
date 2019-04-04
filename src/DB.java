@@ -238,6 +238,7 @@ public class DB {
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM Hotel WHERE manager_id = '"+managerUuid+"'");
             if (rs.next()) {
+                hotel.setHotelID(rs.getInt("hotel_id"));
                 hotel.setAddress(rs.getString("address"));
                 hotel.setCity(rs.getString("city"));
                 hotel.setName(rs.getString("name"));
