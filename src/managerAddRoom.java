@@ -119,7 +119,6 @@ public class managerAddRoom extends JFrame {
                                 float roomCost = Float.valueOf(textField_1.getText().trim()).floatValue();
                                 String features = textField_3.getText().trim();
                                 DB.insertNewRoom(roomID, features, roomCost,user.uuid);
-                                
 				JOptionPane.showMessageDialog(btnCloseApplication,"Room Added");
 				managerRoomMod mrm = new managerRoomMod(currentUser);
 				mrm.setVisible(true);
