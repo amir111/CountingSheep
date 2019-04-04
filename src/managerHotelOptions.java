@@ -120,9 +120,10 @@ public class managerHotelOptions extends JFrame {
   
         btnNewButton.setFont(new Font("Arial Black", Font.PLAIN, 24));
 		btnNewButton.setForeground(Color.RED);
-		btnNewButton.setBounds(223, 366, 249, 28);
+		btnNewButton.setBounds(224, 366, 249, 28);
 		contentPane.add(btnNewButton);
                 //added
+                //test
                 
 		JButton btnUpdateButton = new JButton("Update");
 		btnUpdateButton.addActionListener(new ActionListener() {
