@@ -90,7 +90,7 @@ public class managerHotelOptions extends JFrame {
         JLabel lblNewLabe2 = new JLabel("Hotel Options\r\n");
         lblNewLabe2.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 70));
         lblNewLabe2.setBounds(131, 13, 656, 103);
-        contentPane.add(lblNewLabe2);
+        contentPane.add(lblNewLabe2); 
 
         JCheckBox chckbxNewCheckBox = new JCheckBox("Breakfast\r\n");
         chckbxNewCheckBox.setFont(new Font("Arial Black", Font.PLAIN, 18));
