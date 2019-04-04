@@ -39,6 +39,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 
 public class managerHotelOptions extends JFrame {
 
@@ -89,7 +90,7 @@ public class managerHotelOptions extends JFrame {
         JLabel lblNewLabe2 = new JLabel("Hotel Options\r\n");
         lblNewLabe2.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 70));
         lblNewLabe2.setBounds(131, 13, 656, 103);
-        contentPane.add(lblNewLabe2);
+        contentPane.add(lblNewLabe2); 
 
         JCheckBox chckbxNewCheckBox = new JCheckBox("Breakfast\r\n");
         chckbxNewCheckBox.setFont(new Font("Arial Black", Font.PLAIN, 18));
@@ -119,8 +120,27 @@ public class managerHotelOptions extends JFrame {
   
         btnNewButton.setFont(new Font("Arial Black", Font.PLAIN, 24));
 		btnNewButton.setForeground(Color.RED);
-		btnNewButton.setBounds(223, 366, 249, 28);
+		btnNewButton.setBounds(224, 366, 249, 28);
 		contentPane.add(btnNewButton);
+                //added
+                //test
+                
+		JButton btnUpdateButton = new JButton("Update");
+		btnUpdateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                            				JOptionPane.showMessageDialog(btnUpdateButton,"Hotel Options Updated");
+
+				managerMain mrm = new managerMain(currentUser);
+				mrm.setVisible(true);
+				close();
+				
+			}
+		});
+		btnUpdateButton.setFont(new Font("Arial Black", Font.PLAIN, 20));
+		btnUpdateButton.setForeground(Color.GREEN);
+		btnUpdateButton.setBounds(519, 246, 193, 41);
+		contentPane.add(btnUpdateButton);
+		
     }
 
 }
