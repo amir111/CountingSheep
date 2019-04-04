@@ -100,7 +100,7 @@ public class managerViewRoomOnly extends JFrame {
 		btnCloseApplication.setBounds(522, 854, 245, 55);
 		contentPane.add(btnCloseApplication);
 		
-		JLabel lblRoomId = new JLabel("Room ID");
+		JLabel lblRoomId = new JLabel("Room #");
 		lblRoomId.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		lblRoomId.setBounds(66, 174, 127, 34);
 		contentPane.add(lblRoomId);
@@ -156,7 +156,7 @@ public class managerViewRoomOnly extends JFrame {
 		textField_4.setBounds(219, 381, 146, 31);
 		contentPane.add(textField_4);
 		
-		JLabel label = new JLabel("Room ID");
+		JLabel label = new JLabel("Room #");
 		label.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label.setBounds(522, 174, 127, 34);
 		contentPane.add(label);
@@ -211,7 +211,7 @@ public class managerViewRoomOnly extends JFrame {
 		textField_9.setBounds(675, 179, 146, 31);
 		contentPane.add(textField_9);
 		
-		JLabel label_5 = new JLabel("Room ID");
+		JLabel label_5 = new JLabel("Room #");
 		label_5.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_5.setBounds(997, 174, 127, 34);
 		contentPane.add(label_5);
@@ -266,7 +266,7 @@ public class managerViewRoomOnly extends JFrame {
 		textField_14.setBounds(1150, 179, 146, 31);
 		contentPane.add(textField_14);
 		
-		JLabel label_10 = new JLabel("Room ID");
+		JLabel label_10 = new JLabel("Room #");
 		label_10.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_10.setBounds(69, 547, 127, 34);
 		contentPane.add(label_10);
@@ -321,7 +321,7 @@ public class managerViewRoomOnly extends JFrame {
 		textField_19.setBounds(222, 552, 146, 31);
 		contentPane.add(textField_19);
 		
-		JLabel label_15 = new JLabel("Room ID");
+		JLabel label_15 = new JLabel("Room #");
 		label_15.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_15.setBounds(525, 547, 127, 34);
 		contentPane.add(label_15);
@@ -376,7 +376,7 @@ public class managerViewRoomOnly extends JFrame {
 		textField_24.setBounds(678, 552, 146, 31);
 		contentPane.add(textField_24);
 		
-		JLabel label_20 = new JLabel("Room ID");
+		JLabel label_20 = new JLabel("Room #");
 		label_20.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_20.setBounds(1000, 547, 127, 34);
 		contentPane.add(label_20);

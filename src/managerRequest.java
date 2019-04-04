@@ -51,7 +51,7 @@ public class managerRequest extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("VIew Request\r\n");
+		JLabel lblNewLabel = new JLabel("View Request\r\n");
 		lblNewLabel.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 70));
 		lblNewLabel.setBounds(188, 13, 656, 103);
 		contentPane.add(lblNewLabel);

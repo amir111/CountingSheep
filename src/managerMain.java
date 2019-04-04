@@ -90,8 +90,27 @@ public class managerMain extends JFrame {
 		});
 		btnCloseApplication.setForeground(new Color(255, 0, 0));
 		btnCloseApplication.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		btnCloseApplication.setBounds(229, 332, 245, 55);
+		btnCloseApplication.setBounds(229, 350, 245, 55);
 		contentPane.add(btnCloseApplication);
+                
+                //ADDED
+                
+                
+		JButton btnHotelOptions = new JButton("Hotel Options\r\n");
+		btnHotelOptions.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					managerHotelOptions mrm = new managerHotelOptions(currentUser);
+					mrm.setVisible(true);
+					close();
+				
+				
+			}
+		});
+		btnHotelOptions.setFont(new Font("Arial Black", Font.PLAIN, 20));
+		btnHotelOptions.setBounds(239, 255, 245, 55);
+		contentPane.add(btnHotelOptions);
+                
+                
 		
 		
 	}

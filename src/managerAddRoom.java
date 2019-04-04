@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
-
+ 
 public class managerAddRoom extends JFrame {
 
 	private JPanel contentPane;
@@ -74,7 +74,7 @@ public class managerAddRoom extends JFrame {
 		btnCloseApplication.setBounds(267, 361, 245, 55);
 		contentPane.add(btnCloseApplication);
 		
-		JLabel lblRoomId = new JLabel("Room ID");
+		JLabel lblRoomId = new JLabel("Room #");
 		lblRoomId.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		lblRoomId.setBounds(71, 139, 116, 32);
 		contentPane.add(lblRoomId);
@@ -86,7 +86,7 @@ public class managerAddRoom extends JFrame {
 		
 		
 		
-		JLabel lblFeatures = new JLabel("Features \r\n");
+		JLabel lblFeatures = new JLabel("Description \r\n");
 		lblFeatures.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		lblFeatures.setBounds(418, 139, 116, 32);
 		contentPane.add(lblFeatures);

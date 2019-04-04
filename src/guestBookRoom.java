@@ -73,25 +73,31 @@ public class guestBookRoom extends JFrame {
 		btnGuestPortfolio.setBounds(22, 19, 260, 25);
 		contentPane.add(btnGuestPortfolio);
 		
-		JPanel panel_6 = new JPanel();
-		panel_6.setBounds(22, 98, 163, 94);
-		contentPane.add(panel_6);
+		
 		
 		JLabel label_20 = new JLabel("Price ");
 		label_20.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_20.setBounds(22, 276, 159, 25);
 		contentPane.add(label_20);
 		
-		JLabel label_23 = new JLabel("City");
+		JLabel label_23 = new JLabel("Address");
 		label_23.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_23.setBounds(19, 238, 166, 37);
 		contentPane.add(label_23);
-		
+		//ADDED
 		JLabel label_26 = new JLabel("Rating ");
 		label_26.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		label_26.setBounds(22, 352, 146, 37);
+		label_26.setBounds(22, 360, 146, 37);
 		contentPane.add(label_26);
 		
+                
+                JLabel label_36 = new JLabel("Room #  ");
+		label_36.setFont(new Font("Arial Black", Font.PLAIN, 20));
+		label_36.setBounds(22, 400, 146, 37);
+		contentPane.add(label_36);
+                
+                
+                
 		JLabel label_29 = new JLabel("Features");
 		label_29.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_29.setBounds(22, 314, 146, 25);
@@ -106,10 +112,10 @@ public class guestBookRoom extends JFrame {
 				close();
 			}
 		});
-		button_5.setBounds(74, 419, 97, 25);
+		button_5.setBounds(74, 445, 97, 25);
 		contentPane.add(button_5);
 		
-		JLabel lblHotelId = new JLabel("Hotel ID");
+		JLabel lblHotelId = new JLabel("Hotel Name");
 		lblHotelId.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		lblHotelId.setBounds(22, 205, 159, 37);
 		contentPane.add(lblHotelId);
@@ -134,16 +140,14 @@ public class guestBookRoom extends JFrame {
 		panel_4.setBounds(163, 364, 97, 25);
 		contentPane.add(panel_4);
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(383, 98, 163, 94);
-		contentPane.add(panel_5);
 		
-		JLabel label = new JLabel("Hotel ID");
+		
+		JLabel label = new JLabel("Hotel Name");
 		label.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label.setBounds(383, 205, 159, 37);
 		contentPane.add(label);
 		
-		JLabel label_1 = new JLabel("City");
+		JLabel label_1 = new JLabel("Address");
 		label_1.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_1.setBounds(380, 238, 166, 37);
 		contentPane.add(label_1);
@@ -162,6 +166,20 @@ public class guestBookRoom extends JFrame {
 		label_4.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_4.setBounds(383, 352, 146, 37);
 		contentPane.add(label_4);
+                //ADDED
+                 JLabel label_37 = new JLabel("Room # ");
+		label_37.setFont(new Font("Arial Black", Font.PLAIN, 20));
+		label_37.setBounds(383, 400, 146, 37);
+		contentPane.add(label_37);
+                
+                   JPanel panel_39 = new JPanel();
+		panel_39.setBounds(524, 400, 97, 25);
+		contentPane.add(panel_39);
+		
+                
+                JPanel panel_36 = new JPanel();
+		panel_36.setBounds(163, 400, 97, 25);
+		contentPane.add(panel_36);
 		
 		JButton button = new JButton("Book");
 		button.addActionListener(new ActionListener() {
@@ -172,7 +190,7 @@ public class guestBookRoom extends JFrame {
 			}
 		});
 		button.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		button.setBounds(435, 419, 97, 25);
+		button.setBounds(435, 445, 97, 25);
 		contentPane.add(button);
 		
 		JPanel panel_7 = new JPanel();
@@ -195,16 +213,14 @@ public class guestBookRoom extends JFrame {
 		panel_11.setBounds(524, 206, 97, 25);
 		contentPane.add(panel_11);
 		
-		JPanel panel_12 = new JPanel();
-		panel_12.setBounds(743, 98, 163, 94);
-		contentPane.add(panel_12);
+	
 		
-		JLabel label_5 = new JLabel("Hotel ID");
+		JLabel label_5 = new JLabel("Hotel Name");
 		label_5.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_5.setBounds(743, 205, 159, 37);
 		contentPane.add(label_5);
 		
-		JLabel label_6 = new JLabel("City");
+		JLabel label_6 = new JLabel("Address");
 		label_6.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_6.setBounds(740, 238, 166, 37);
 		contentPane.add(label_6);
@@ -223,7 +239,25 @@ public class guestBookRoom extends JFrame {
 		label_9.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_9.setBounds(743, 352, 146, 37);
 		contentPane.add(label_9);
+                
+                
+                //ADDED
+                 JLabel label_38 = new JLabel("Room #  ");
+		label_38.setFont(new Font("Arial Black", Font.PLAIN, 20));
+		label_38.setBounds(743, 400, 146, 37);
+		contentPane.add(label_38);
+                
+                   JPanel panel_37 = new JPanel();
+		panel_37.setBounds(884, 400, 97, 25);
+		contentPane.add(panel_37);
+                
+                
+		JPanel panel_40 = new JPanel();
+		panel_40.setBounds(884, 775, 97, 25);
+		contentPane.add(panel_40);
 		
+                
+                
 		JButton button_1 = new JButton("Book");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -233,7 +267,7 @@ public class guestBookRoom extends JFrame {
 			}
 		});
 		button_1.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		button_1.setBounds(795, 419, 97, 25);
+		button_1.setBounds(795, 445, 97, 25);
 		contentPane.add(button_1);
 		
 		JPanel panel_13 = new JPanel();
@@ -256,16 +290,14 @@ public class guestBookRoom extends JFrame {
 		panel_17.setBounds(884, 206, 97, 25);
 		contentPane.add(panel_17);
 		
-		JPanel panel_18 = new JPanel();
-		panel_18.setBounds(25, 472, 163, 94);
-		contentPane.add(panel_18);
+	
 		
-		JLabel label_10 = new JLabel("Hotel ID");
+		JLabel label_10 = new JLabel("Hotel Name");
 		label_10.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_10.setBounds(25, 579, 159, 37);
 		contentPane.add(label_10);
 		
-		JLabel label_11 = new JLabel("City");
+		JLabel label_11 = new JLabel("Address");
 		label_11.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_11.setBounds(22, 612, 166, 37);
 		contentPane.add(label_11);
@@ -284,6 +316,16 @@ public class guestBookRoom extends JFrame {
 		label_14.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_14.setBounds(25, 726, 146, 37);
 		contentPane.add(label_14);
+                //ADDED
+                 JLabel label_40 = new JLabel("Room # ");
+		label_40.setFont(new Font("Arial Black", Font.PLAIN, 20));
+		label_40.setBounds(25, 760, 146, 37);
+		contentPane.add(label_40);
+                
+                
+                JPanel panel_42 = new JPanel();
+		panel_42.setBounds(166, 775, 97, 25);
+		contentPane.add(panel_42);
 		
 		JButton button_2 = new JButton("Book");
 		button_2.addActionListener(new ActionListener() {
@@ -294,7 +336,7 @@ public class guestBookRoom extends JFrame {
 			}
 		});
 		button_2.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		button_2.setBounds(77, 793, 97, 25);
+		button_2.setBounds(77, 815, 97, 25);
 		contentPane.add(button_2);
 		
 		JPanel panel_19 = new JPanel();
@@ -317,16 +359,13 @@ public class guestBookRoom extends JFrame {
 		panel_23.setBounds(166, 580, 97, 25);
 		contentPane.add(panel_23);
 		
-		JPanel panel_24 = new JPanel();
-		panel_24.setBounds(386, 472, 163, 94);
-		contentPane.add(panel_24);
 		
-		JLabel label_15 = new JLabel("Hotel ID");
+		JLabel label_15 = new JLabel("Hotel Name");
 		label_15.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_15.setBounds(386, 579, 159, 37);
 		contentPane.add(label_15);
 		
-		JLabel label_16 = new JLabel("City");
+		JLabel label_16 = new JLabel("Address");
 		label_16.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_16.setBounds(383, 612, 166, 37);
 		contentPane.add(label_16);
@@ -345,6 +384,16 @@ public class guestBookRoom extends JFrame {
 		label_19.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_19.setBounds(386, 726, 146, 37);
 		contentPane.add(label_19);
+                //ADDED
+                  JLabel label_41 = new JLabel("Room # ");
+		label_41.setFont(new Font("Arial Black", Font.PLAIN, 20));
+		label_41.setBounds(386, 760, 146, 37);
+		contentPane.add(label_41);
+                
+                JPanel panel_43 = new JPanel();
+		panel_43.setBounds(527, 775, 97, 25);
+		contentPane.add(panel_43);
+                
 		
 		JButton button_3 = new JButton("Book");
 		button_3.addActionListener(new ActionListener() {
@@ -355,7 +404,7 @@ public class guestBookRoom extends JFrame {
 			}
 		});
 		button_3.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		button_3.setBounds(438, 793, 97, 25);
+		button_3.setBounds(438, 815, 97, 25);
 		contentPane.add(button_3);
 		
 		JPanel panel_25 = new JPanel();
@@ -378,16 +427,14 @@ public class guestBookRoom extends JFrame {
 		panel_29.setBounds(527, 580, 97, 25);
 		contentPane.add(panel_29);
 		
-		JPanel panel_30 = new JPanel();
-		panel_30.setBounds(746, 472, 163, 94);
-		contentPane.add(panel_30);
 		
-		JLabel label_21 = new JLabel("Hotel ID");
+		
+		JLabel label_21 = new JLabel("Hotel Name");
 		label_21.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_21.setBounds(746, 579, 159, 37);
 		contentPane.add(label_21);
 		
-		JLabel label_22 = new JLabel("City");
+		JLabel label_22 = new JLabel("Address");
 		label_22.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		label_22.setBounds(743, 612, 166, 37);
 		contentPane.add(label_22);
@@ -407,6 +454,13 @@ public class guestBookRoom extends JFrame {
 		label_27.setBounds(746, 726, 146, 37);
 		contentPane.add(label_27);
 		
+                //ADDED
+                  JLabel label_42 = new JLabel("Room # ");
+		label_42.setFont(new Font("Arial Black", Font.PLAIN, 20));
+		label_42.setBounds(746, 760, 146, 37);
+		contentPane.add(label_42);
+                
+                
 		JButton button_4 = new JButton("Book");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -416,7 +470,7 @@ public class guestBookRoom extends JFrame {
 			}
 		});
 		button_4.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		button_4.setBounds(798, 793, 97, 25);
+		button_4.setBounds(798, 815, 97, 25);
 		contentPane.add(button_4);
 		
 		JPanel panel_31 = new JPanel();
