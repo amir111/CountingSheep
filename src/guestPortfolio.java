@@ -12,10 +12,30 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import java.awt.Color;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.SystemColor;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
+
 public class guestPortfolio extends JFrame {
 
 	private JPanel contentPane;
+        private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
         public static User currentUser;
+        
 	/**
 	 * Launch the application.
 	 */
@@ -137,5 +157,50 @@ public class guestPortfolio extends JFrame {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(62, 301, 210, 26);
 		contentPane.add(panel_2);
+                //ADDED BUTTON
+                //CHANGES THE PASSWORD
+                 
+                
+                JButton changePassword = new JButton("Change Password\r\n");
+		changePassword.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+                            	JOptionPane.showMessageDialog(btnBookingInfo, "Password Changed");
+
+				
+				guestPortfolio back = new guestPortfolio(currentUser);
+				back.setVisible(true);
+				close();
+			}
+		});
+                
+                //ADDED BUTTON
+		changePassword.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		changePassword.setBounds(284, 301, 177, 29);
+		contentPane.add(changePassword);
+                
+                //TEXT FIELD IN THE 3 BOXES TO IMPORT DATA
+                //CAN DELETE THEM IF NOT NEEDED 
+                
+                
+		textField = new JTextField();
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		
+		
+		textField_1 = new JTextField();
+		panel_1.add(textField_1);
+		textField_1.setColumns(10);
+		
+		
+		
+		textField_2 = new JTextField();
+		panel_2.add(textField_2);
+		textField_2.setColumns(10);
+                
+              
+		
+		
+		
 	}
 }

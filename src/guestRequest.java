@@ -61,7 +61,7 @@ public class guestRequest extends JFrame {
 		lblGuestRequest.setBounds(99, 0, 593, 125);
 		contentPane.add(lblGuestRequest);
 		
-		JLabel lblFoood = new JLabel("Foood");
+		JLabel lblFoood = new JLabel("Food");
 		lblFoood.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		lblFoood.setBounds(102, 151, 121, 38);
 		contentPane.add(lblFoood);

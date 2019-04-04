@@ -72,7 +72,7 @@ public class managerDeleteRoom extends JFrame {
 		btnCloseApplication.setBounds(234, 361, 245, 55);
 		contentPane.add(btnCloseApplication);
 		
-		JLabel lblRoomId = new JLabel("Room ID");
+		JLabel lblRoomId = new JLabel("Room #");
 		lblRoomId.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		lblRoomId.setBounds(299, 129, 116, 32);
 		contentPane.add(lblRoomId);
@@ -82,7 +82,7 @@ public class managerDeleteRoom extends JFrame {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
                                 int roomNum = Integer.valueOf(textField.getText().trim()).intValue();
-                                DB.deleteRoomByNumber(roomNum, user.uuid);
+                                  DB.deleteRoomByNumber(roomNum, user.uuid);
 				JOptionPane.showMessageDialog(btnCloseApplication,"Room Deleted");
 				managerRoomMod mrm = new managerRoomMod(currentUser);
 				mrm.setVisible(true);
