@@ -105,13 +105,7 @@ public class guestFinalBooking extends JFrame {
 		btnBookNow.setBounds(276, 356, 190, 47);
 		contentPane.add(btnBookNow);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(527, 98, 217, 136);
-		contentPane.add(panel);
-		
-		JLabel lblPictureOfHotel = new JLabel("Picture of Hotel");
-		lblPictureOfHotel.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		panel.add(lblPictureOfHotel);
+	
 		
 		JButton btnCheckEnterCc = new JButton("Check CC Valid\r\n");
 		btnCheckEnterCc.setForeground(Color.BLACK);
