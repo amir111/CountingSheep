@@ -82,23 +82,11 @@ public class managerDeleteRoom extends JFrame {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
                                 int roomNum = Integer.valueOf(textField.getText().trim()).intValue();
-                                try{
-                                if(DB.deleteRoomByNumber(roomNum, user.uuid)==false){
-                                    throw new Exception();
-                                }
-                                else{
-                                    DB.deleteRoomByNumber(roomNum, user.uuid);
-                                    JOptionPane.showMessageDialog(btnCloseApplication,"Room Deleted");
-                                    managerRoomMod mrm = new managerRoomMod(currentUser);
-                                    mrm.setVisible(true);
-                                    close();
-                                }
-                                }
-                                catch (Exception E){
-                                    JOptionPane.showMessageDialog(btnCloseApplication,"Room Not Found");
-                                }
-				
-				
+                                  DB.deleteRoomByNumber(roomNum, user.uuid);
+				JOptionPane.showMessageDialog(btnCloseApplication,"Room Deleted");
+				managerRoomMod mrm = new managerRoomMod(currentUser);
+				mrm.setVisible(true);
+				close();
 				
 
 			}
