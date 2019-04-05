@@ -128,8 +128,12 @@ public class managerHotelOptions extends JFrame {
 		JButton btnUpdateButton = new JButton("Update");
 		btnUpdateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                            				JOptionPane.showMessageDialog(btnUpdateButton,"Hotel Options Updated");
-
+                            	boolean pool = chckbxPool.isSelected();
+                                boolean breakfast = chckbxNewCheckBox.isSelected();
+                                boolean foodDeliv = chckbxFoodDelivery.isSelected();
+                                DB.updateHotelFeatures(user.uuid, breakfast, pool, foodDeliv);
+                                
+                                JOptionPane.showMessageDialog(btnUpdateButton,"Hotel Options Updated");
 				managerMain mrm = new managerMain(currentUser);
 				mrm.setVisible(true);
 				close();
