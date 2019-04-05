@@ -74,9 +74,9 @@ public class managerAddRoom extends JFrame {
 		btnCloseApplication.setBounds(267, 361, 245, 55);
 		contentPane.add(btnCloseApplication);
 		
-		JLabel lblRoomId = new JLabel("Room #");
+		JLabel lblRoomId = new JLabel("Room Number");
 		lblRoomId.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		lblRoomId.setBounds(71, 139, 116, 32);
+		lblRoomId.setBounds(71, 139, 190, 32);
 		contentPane.add(lblRoomId);
 		
 		JLabel lblRoomCost = new JLabel("Room Cost\r\n");
@@ -88,19 +88,18 @@ public class managerAddRoom extends JFrame {
 		
 		JLabel lblFeatures = new JLabel("Description \r\n");
 		lblFeatures.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		lblFeatures.setBounds(418, 139, 116, 32);
+		lblFeatures.setBounds(418, 139, 150, 32);
 		contentPane.add(lblFeatures);
-		
-		
-		
+	
+                
 		textField = new JTextField();
-		textField.setBounds(199, 142, 137, 32);
+		textField.setBounds(239, 142, 137, 32);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(199, 187, 137, 32);
+		textField_1.setBounds(239, 187, 137, 32);
 		contentPane.add(textField_1);
 		
 		
@@ -118,12 +117,22 @@ public class managerAddRoom extends JFrame {
                                 int roomID = Integer.valueOf(textField.getText().trim()).intValue();
                                 float roomCost = Float.valueOf(textField_1.getText().trim()).floatValue();
                                 String features = textField_3.getText().trim();
+                                try{
+                                
+                                if(DB.insertNewRoom(roomID, features, roomCost,user.uuid)==false){
+                                    throw new Exception();
+                                }
+                                else{
                                 DB.insertNewRoom(roomID, features, roomCost,user.uuid);
 				JOptionPane.showMessageDialog(btnCloseApplication,"Room Added");
 				managerRoomMod mrm = new managerRoomMod(currentUser);
 				mrm.setVisible(true);
 				close();
-				
+                                }
+                                }
+                                catch (Exception E){
+                                    JOptionPane.showMessageDialog(btnCloseApplication,"Room Number Already Used");
+                                }
 
 			}
 		});
