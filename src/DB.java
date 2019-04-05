@@ -363,14 +363,14 @@ public class DB {
     //This method updates target room number within the manager's hotel, this assume that either the description or the price is not null
     public static boolean updateRoom(int roomNumber,int userUuid,String description,float price){
         Hotel hotel = DB.selectHotelByManager(userUuid);
-        if(roomExists(userUuid,roomNumber)){
+        if(!roomExists(userUuid,roomNumber)){
             return false;
         }
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
             String sql;
-            if(description.isEmpty()){
+            if(description.equals("")){
                 sql = "update Room\nset price = '"+price+"'\nwhere number = '"+roomNumber+"' and hotel_id = '"+hotel.getHotelID()+"'";
             }
             else if(price == 0.0f){
