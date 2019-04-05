@@ -33,11 +33,12 @@ public class DB {
         return uuid;
     }
     
-    private static boolean roomExists(int hotelUuid, int roomNum){
+    public static boolean roomExists(int userUuid, int roomNum){
         Connection conn = connect();
+        Hotel hotel = DB.selectHotelByManager(userUuid);
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Room WHERE hotel_id = '" + hotelUuid + "' AND number = '"+roomNum+"'");
+            ResultSet rs = statement.executeQuery("SELECT * FROM Room WHERE hotel_id = '" + hotel.getHotelID() + "' AND number = '"+roomNum+"'");
             if (rs.next()) {
                 return true;
             }
@@ -326,7 +327,7 @@ public class DB {
     //This method creates a new room based on manager input
     public static boolean insertNewRoom(int roomNumber,String description,float price,int userUuid){
         Hotel hotel = DB.selectHotelByManager(userUuid);
-        if(roomExists(hotel.getHotelID(),roomNumber)){
+        if(roomExists(userUuid,roomNumber)){
             return false;
         }
         Connection conn = connect();
@@ -361,8 +362,10 @@ public class DB {
     
     //This method updates target room number within the manager's hotel, this assume that either the description or the price is not null
     public static boolean updateRoom(int roomNumber,int userUuid,String description,float price){
-        boolean updated = false;
         Hotel hotel = DB.selectHotelByManager(userUuid);
+        if(roomExists(userUuid,roomNumber)){
+            return false;
+        }
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
@@ -376,15 +379,12 @@ public class DB {
             else{
                 sql = "update Room\nset description = '"+description+"', price = '"+price+"'\nwhere number = '"+roomNumber+"' and hotel_id = '"+hotel.getHotelID()+"'";
             }
-            int numUpdated = statement.executeUpdate(sql);
-            if (numUpdated > 0) {
-                updated = true;
-            }
+            statement.executeUpdate(sql);
             conn.close();
         } catch (Exception e) {
             throw new IllegalStateException("", e);
         }
-        return updated;
+        return true;
     }
     
     //This method sets target request as complete
