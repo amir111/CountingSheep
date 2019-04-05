@@ -22,6 +22,7 @@ public class managerRoomModify extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+        private JTextField textField_5;
         static User currentUser;
 
 	/**
@@ -76,42 +77,45 @@ public class managerRoomModify extends JFrame {
 		btnCloseApplication.setBounds(253, 414, 245, 55);
 		contentPane.add(btnCloseApplication);
 		
-		JLabel lblRoomId = new JLabel("Room ID");
-		lblRoomId.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		lblRoomId.setBounds(71, 139, 116, 32);
-		contentPane.add(lblRoomId);
+		JLabel lblOldRoomId = new JLabel("Room Number");
+		lblOldRoomId.setFont(new Font("Arial Black", Font.PLAIN, 20));
+		lblOldRoomId.setBounds(280, 119, 286, 32);
+		contentPane.add(lblOldRoomId);
 		
-		JLabel lblRoomCost = new JLabel("Room Cost\r\n");
-		lblRoomCost.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		lblRoomCost.setBounds(71, 195, 150, 32);
-		contentPane.add(lblRoomCost);
-		
-		JLabel lblCity = new JLabel("City \r\n");
-		lblCity.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		lblCity.setBounds(71, 239, 116, 32);
-		contentPane.add(lblCity);
-		
-		JLabel lblFeatures = new JLabel("Features \r\n");
-		lblFeatures.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		lblFeatures.setBounds(418, 139, 116, 32);
-		contentPane.add(lblFeatures);
-		
-		JLabel lblRatings = new JLabel("Ratings\r\n");
-		lblRatings.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		lblRatings.setBounds(418, 206, 116, 32);
-		contentPane.add(lblRatings);
+		JLabel lblNewRoomCost = new JLabel("New Room Cost\r\n");
+		lblNewRoomCost.setFont(new Font("Arial Black", Font.PLAIN, 20));
+		lblNewRoomCost.setBounds(280, 183, 286, 32);
+		contentPane.add(lblNewRoomCost);
 		 
-		
+		JLabel lblNewRoomDescrip = new JLabel("New Description\r\n");
+		lblNewRoomDescrip.setFont(new Font("Arial Black", Font.PLAIN, 20));
+		lblNewRoomDescrip.setBounds(280, 247, 286, 32);
+		contentPane.add(lblNewRoomDescrip);
 		
 		JButton btnSubmit = new JButton("UPDATE");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(btnCloseApplication,"Room Updated");
-				managerModViewRooms mrm = new managerModViewRooms(currentUser);
-				mrm.setVisible(true);
-				close();
-				
-
+                                int oldRoomNum = Integer.valueOf(textField.getText().trim()).intValue();
+                                float newRoomCost = Float.valueOf(textField_4.getText().trim()).floatValue();
+                                String newFeatures = textField_5.getText().trim();
+                                
+                                try{
+                                    if(DB.roomExists(user.uuid, oldRoomNum)==false){
+                                        throw new NullPointerException();
+                                    }
+                                    else{
+                                        DB.updateRoom(oldRoomNum, user.uuid, newFeatures, newRoomCost);
+                                        
+                                        JOptionPane.showMessageDialog(btnCloseApplication,"Room Modified");
+                                        managerModViewRooms mrm = new managerModViewRooms(currentUser);
+                                        mrm.setVisible(true);
+                                        close();
+                                    }
+                                }
+                                catch(NullPointerException E){
+                                    JOptionPane.showMessageDialog(btnCloseApplication,"Cannot Find Room Number");
+                                }
+                            
 			}
 		});
 		btnSubmit.setForeground(Color.GREEN);
@@ -120,29 +124,19 @@ public class managerRoomModify extends JFrame {
 		contentPane.add(btnSubmit);
 		
 		textField = new JTextField();
-		textField.setBounds(204, 147, 123, 35);
+		textField.setBounds(280, 151, 136, 32);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(204, 203, 123, 35);
-		contentPane.add(textField_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(204, 247, 123, 35);
-		contentPane.add(textField_2);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(546, 129, 123, 35);
-		contentPane.add(textField_3);
-		
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
-		textField_4.setBounds(531, 214, 123, 35);
+		textField_4.setBounds(280, 215, 136, 32);
 		contentPane.add(textField_4);
+                
+                textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(280, 279, 136, 32);
+		contentPane.add(textField_5);
 	}
 
 }
