@@ -65,8 +65,8 @@ public class Login {
 		lblpaassword.setBounds(237, 216, 157, 67);
 		frame.getContentPane().add(lblpaassword);
 		
-		JLabel lblSleepingSheep = new JLabel("Sleeping Sheep ");
-		lblSleepingSheep.setFont(new Font("Showcard Gothic", Font.BOLD, 82));
+		JLabel lblSleepingSheep = new JLabel("Counting Sheep");
+		lblSleepingSheep.setFont(new Font("Showcard Gothic", Font.BOLD, 80));
 		lblSleepingSheep.setBounds(12, 32, 732, 103);
 		frame.getContentPane().add(lblSleepingSheep);
 		

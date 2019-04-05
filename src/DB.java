@@ -75,7 +75,8 @@ public class DB {
                 newRoom.setRoomID(rs.getInt("room_id"));
                 newRoom.setRoomName(rs.getInt("number"));
                 newRoom.setRoomPrice(rs.getFloat("price"));
-                newRoom.setState("state");
+                newRoom.setState(rs.getString("state"));
+                newRoom.setRating(rs.getInt("rating"));
                 if (rs.getInt("pool") == 1) {
                     newRoom.setPool(true);
                 } else {
@@ -107,11 +108,11 @@ public class DB {
         try {
             Statement statement = conn.createStatement();
             ResultSet rs;
-            if (price == 0.0f && city.isEmpty()) {
+            if (price == 0.0f && city.equals("")) {
                 rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id");
             } else if (price == 0.0f) {
                 rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id AND h.city = '" + city + "'");
-            } else if (city.isEmpty()) {
+            } else if (city.equals("")) {
                 rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id AND r.price = " + price);
             } else {
                 rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id AND r.price = " + price + " AND h.city = '" + city + "'");
@@ -125,7 +126,8 @@ public class DB {
                 newRoom.setRoomID(rs.getInt("room_id"));
                 newRoom.setRoomName(rs.getInt("number"));
                 newRoom.setRoomPrice(rs.getFloat("price"));
-                newRoom.setState("state");
+                newRoom.setState(rs.getString("state"));
+                newRoom.setRating(rs.getInt("rating"));
                 if (rs.getInt("pool") == 1) {
                     newRoom.setPool(true);
                 } else {
@@ -243,7 +245,8 @@ public class DB {
                 hotel.setAddress(rs.getString("address"));
                 hotel.setCity(rs.getString("city"));
                 hotel.setName(rs.getString("name"));
-                hotel.setState("state");
+                hotel.setState(rs.getString("state"));
+                hotel.setRating(rs.getInt("rating"));
                 if (rs.getInt("pool") == 1) {
                     hotel.setPool(true);
                 } else {
