@@ -91,7 +91,7 @@ public class guestSearchRoom extends JFrame {
         lblPrice.setFont(new Font("Arial Black", Font.PLAIN, 20));
         lblPrice.setBounds(191, 200, 56, 16);
         contentPane.add(lblPrice);
-        
+
         JLabel lblDate = new JLabel("Dates");
         lblDate.setFont(new Font("Arial Black", Font.PLAIN, 20));
         lblDate.setBounds(191, 247, 65, 16);
@@ -106,37 +106,37 @@ public class guestSearchRoom extends JFrame {
         textField_1.setBounds(295, 193, 153, 36);
         contentPane.add(textField_1);
         textField_1.setColumns(10);
-        
+
         startMonth = new JTextField();
         startMonth.setBounds(295, 247, 30, 36);
         contentPane.add(startMonth);
         startMonth.setColumns(2);
-        
+
         startDay = new JTextField();
         startDay.setBounds(330, 247, 30, 36);
         contentPane.add(startDay);
         startDay.setColumns(2);
-        
+
         startYear = new JTextField();
         startYear.setBounds(365, 247, 50, 36);
         contentPane.add(startYear);
         startYear.setColumns(2);
-        
+
         JLabel lblDate2 = new JLabel("to");
         lblDate2.setFont(new Font("Arial Black", Font.PLAIN, 20));
         lblDate2.setBounds(440, 252, 65, 16);
         contentPane.add(lblDate2);
-        
+
         endMonth = new JTextField();
         endMonth.setBounds(480, 247, 30, 36);
         contentPane.add(endMonth);
         endMonth.setColumns(2);
-        
+
         endDay = new JTextField();
         endDay.setBounds(515, 247, 30, 36);
         contentPane.add(endDay);
         endDay.setColumns(2);
-        
+
         endYear = new JTextField();
         endYear.setBounds(550, 247, 50, 36);
         contentPane.add(endYear);
@@ -154,13 +154,83 @@ public class guestSearchRoom extends JFrame {
                     } else {
                         inputPrice = Float.valueOf(textField_1.getText().trim()).floatValue();
                     }
-                    rooms = DB.selectRooms(inputPrice, textField.getText());
-                    
+
+                    //   System.out.println(startMonth.getText() +", "+ startDay.getText() +", "+ endMonth.getText() +", "+ endDay.getText() +", "+ endYear.getText());
                     //NOTE: Process date input, make sure you can make a string in the exact format of YYYY-MM-DD, otherwise throw an exception and make the user do it right
-                    String startDate = "1997-08-23";
+                    String sDay = (startDay.getText());
+                    if (sDay.matches("^([0-9]{2})$")) {
+                        //JOptionPane.showMessageDialog(btnSearch, "CC Valid");
+                    } else {
+                        JOptionPane.showMessageDialog(btnSearch, "Invalid Start Day Entered, must be a digit 1-31");
+                        throw new Exception();
+                    }
+
+                    String sMo = (startMonth.getText());
+                    if (sMo.matches("^([0-9]{2})$")) {
+                        //JOptionPane.showMessageDialog(btnSearch, "CC Valid");
+                    } else {
+                        JOptionPane.showMessageDialog(btnSearch, "Invalid Start Month Entered, must be a digit 1-12");
+                        throw new Exception();
+                    }
+
+                    String sYear = (startYear.getText());
+                    if (sYear.matches("^((?!(0))[0-9]{4})$")) {
+                        //JOptionPane.showMessageDialog(btnSearch, "CC Valid");
+                    } else {
+                        JOptionPane.showMessageDialog(btnSearch, "Invalid Start Year Entered, must be a 4 digit number that does not start with 0");
+                        throw new Exception();
+                    }
+
+                    String eDay = (endDay.getText());
+                    if (eDay.matches("^([0-9]{2})$")) {
+                        //JOptionPane.showMessageDialog(btnSearch, "CC Valid");
+                    } else {
+                        JOptionPane.showMessageDialog(btnSearch, "Invalid end Day Entered, must be a digit 1-31");
+                        throw new Exception();
+                    }
+                    String eMo = (startMonth.getText());
+                    if (eMo.matches("^([0-9]{2})$")) {
+                        //JOptionPane.showMessageDialog(btnSearch, "CC Valid");
+                    } else {
+                        JOptionPane.showMessageDialog(btnSearch, "Invalid end Month Entered, must be a digit 1-12");
+                        throw new Exception();
+                    }
+
+                    String eYear = (startYear.getText());
+                    if (eYear.matches("^((?!(0))[0-9]{4})$")) {
+                        //JOptionPane.showMessageDialog(btnSearch, "CC Valid");
+                    } else {
+                        JOptionPane.showMessageDialog(btnSearch, "Invalid end Year Entered, must be a 4 digit number that does not start with 0");
+                        throw new Exception();
+                    }
+
+                    rooms = DB.selectRooms(inputPrice, textField.getText());
+                    String startDate = startYear.getText() + "-" + startMonth.getText() + "-" + startDay.getText();
+                    //
+                    ArrayList<RequestBooking> bookings;
+                    for (int i = 0; i < rooms.size(); i++) {
+                        bookings = DB.selectBookingsByRoom(rooms.get(i).getRoomID());
+                        for (int j = 0; j < bookings.size(); j++) {
+                            if (CheckDateOverlap.CheckTheDatesPlox(Integer.valueOf(startYear.getText().trim()), Integer.valueOf(startMonth.getText().trim()),
+                                    Integer.valueOf(startDay.getText().trim()), Integer.valueOf(endYear.getText().trim()),
+                                    Integer.valueOf(endMonth.getText().trim()), Integer.valueOf(endDay.getText().trim()), bookings.get(j).getStart_date(), bookings.get(j).getEnd_date())) {
+
+                            } else {
+                                //JOptionPane.showMessageDialog(btnSearch, "CC Invalid, please enter a 16 digit card number that has no letters and doesn't start with 0");
+                                rooms.remove(i);
+                                i--;
+                                break;
+                            }
+                        }
+                    }
+
+//System.out.println(startDate);
                     String endDate = "1997-08-25";
+                    //checkDateOverlap
+
+//                    String startDate = "1997-08-23";
+//                    String endDate = "1997-08-25";
                     //NOTE: Process this list and remove rooms that have bookings that conflict with inputed dates here
-                    
                     guestBookRoom broom = new guestBookRoom(currentUser, rooms, startDate, endDate);
                     broom.setVisible(true);
                     close();
@@ -168,8 +238,10 @@ public class guestSearchRoom extends JFrame {
                     JOptionPane.showMessageDialog(btnSearch, "Invalid Input");
                 }
             }
-        });
-        btnSearch.setBounds(295, 350, 153, 25);
+        }
+        );
+        btnSearch.setBounds(
+                295, 350, 153, 25);
         contentPane.add(btnSearch);
 
     }
