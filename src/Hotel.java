@@ -1,7 +1,9 @@
+
 import java.lang.Object;
 import java.util.ArrayList;
 
 public class Hotel {
+
     int hotelID;
     ArrayList<Room> room = new ArrayList<>();
     String hotelName;
@@ -11,48 +13,49 @@ public class Hotel {
     boolean pool;
     boolean breakfast;
     boolean foodDelivery;
-    
-    public Hotel(){
-        
+    int rating;
+
+    public Hotel() {
+
     }
-    
-    public ArrayList<Room> getRoom(){
+
+    public ArrayList<Room> getRoom() {
         return room;
     }
-    
-    public String getName(){
+
+    public String getName() {
         return hotelName;
     }
-    
-    public String getState(){
+
+    public String getState() {
         return state;
     }
-    
-    public String getCity(){
+
+    public String getCity() {
         return city;
     }
-    
-    public String getAddress(){
+
+    public String getAddress() {
         return address;
     }
-   
-    public void setRoom (Room _room){
+
+    public void setRoom(Room _room) {
         room.add(_room);
     }
-    
-    public void setName(String _name){
-        hotelName =  _name;
+
+    public void setName(String _name) {
+        hotelName = _name;
     }
-    
-    public void setState(String _state){
+
+    public void setState(String _state) {
         state = _state;
     }
-    
-    public void setCity(String _city){
+
+    public void setCity(String _city) {
         city = _city;
     }
-    
-    public void setAddress(String _address){
+
+    public void setAddress(String _address) {
         address = _address;
     }
 
@@ -87,7 +90,27 @@ public class Hotel {
     public void setHotelID(int hotelID) {
         this.hotelID = hotelID;
     }
-    
-    
-    
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public String getFeatures() {
+        String str = "";
+        if (breakfast) {
+            str += "Breakfast, ";
+        }
+        if (pool) {
+            str += "Pool, ";
+        }
+        if (foodDelivery) {
+            str += "Room Service";
+        }
+        return str;
+    }
+
 }

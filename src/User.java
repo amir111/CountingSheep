@@ -5,7 +5,6 @@ public class User {
      char ID;
      String email;
      String phone;
-     String name;
      int uuid;
   
     public User(){
@@ -31,10 +30,6 @@ public class User {
         return phone;
     }
     
-    public String getName(){
-        return name;
-    }
-    
     public void setUsername(String _username){
         username = _username;
     }
@@ -53,10 +48,6 @@ public class User {
     
     public void setPhone(String _phone){
         phone = _phone;
-    }
-    
-    public void setName(String _name){
-        name = _name;
     }
 
     public int getUuid() {
