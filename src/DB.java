@@ -256,7 +256,6 @@ public class DB {
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM Hotel WHERE manager_id = '"+managerUuid+"'");
             if (rs.next()) {
-                
                 hotel.setHotelID(rs.getInt("hotel_id"));
                 hotel.setAddress(rs.getString("address"));
                 hotel.setCity(rs.getString("city"));
@@ -278,6 +277,35 @@ public class DB {
                 } else {
                     hotel.setFoodDelivery(false);
                 }
+            }
+            rs = statement.executeQuery("SELECT * FROM Room WHERE hotel_id = '"+hotel.getHotelID()+"'" );
+            while (rs.next()) {
+                Room newRoom = new Room();
+                newRoom.setAddress(rs.getString("address"));
+                newRoom.setCity(rs.getString("city"));
+                newRoom.setName(rs.getString("name"));
+                newRoom.setRoomDescription(rs.getString("description"));
+                newRoom.setRoomID(rs.getInt("room_id"));
+                newRoom.setRoomName(rs.getInt("number"));
+                newRoom.setRoomPrice(rs.getFloat("price"));
+                newRoom.setState(rs.getString("state"));
+                newRoom.setRating(rs.getInt("rating"));
+                if (rs.getInt("pool") == 1) {
+                    newRoom.setPool(true);
+                } else {
+                    newRoom.setPool(false);
+                }
+                if (rs.getInt("breakfast") == 1) {
+                    newRoom.setBreakfast(true);
+                } else {
+                    newRoom.setBreakfast(false);
+                }
+                if (rs.getInt("food_delivery") == 1) {
+                    newRoom.setFoodDelivery(true);
+                } else {
+                    newRoom.setFoodDelivery(false);
+                }
+                hotel.setRoom(newRoom);
             }
             conn.close();
         } catch (Exception e) {
