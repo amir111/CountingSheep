@@ -32,6 +32,21 @@ public class DB {
         }
         return uuid;
     }
+    
+    private static boolean roomExists(int hotelUuid, int roomNum){
+        Connection conn = connect();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Room WHERE hotel_id = '" + hotelUuid + "' AND number = '"+roomNum+"'");
+            if (rs.next()) {
+                return true;
+            }
+            conn.close();
+        } catch (Exception e) {
+            throw new IllegalStateException("", e);
+        }
+        return false;
+    }
 
     //Used to obtain a specific user's data for login or displaying a manger of a hotel's contact information
     public static User selectTargetUser(String uname) {
@@ -295,6 +310,7 @@ public class DB {
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
+            
             int uuid = getNewId("Booking", statement);
             int numInserted = statement.executeUpdate("insert into Booking\n values('"+uuid+"','"+start+"','"+end+"','"+customerUuid+"','"+roomUuid+"');");
             if (numInserted > 0) {
@@ -309,21 +325,20 @@ public class DB {
     
     //This method creates a new room based on manager input
     public static boolean insertNewRoom(int roomNumber,String description,float price,int userUuid){
-        boolean inserted = false;
         Hotel hotel = DB.selectHotelByManager(userUuid);
+        if(roomExists(hotel.getHotelID(),roomNumber)){
+            return false;
+        }
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
             int uuid = getNewId("Room", statement);
-            int numInserted = statement.executeUpdate("insert into Room\n values('"+uuid+"','"+roomNumber+"','"+description+"','"+price+"','"+hotel.getHotelID()+"');");
-            if (numInserted > 0) {
-                inserted = true;
-            }
+            statement.executeUpdate("insert into Room\n values('"+uuid+"','"+roomNumber+"','"+description+"','"+price+"','"+hotel.getHotelID()+"');");
             conn.close();
         } catch (Exception e) {
             throw new IllegalStateException("", e);
         }
-        return inserted;
+        return true;
     }
     
     //This method deletes a room within the manager's hotel
