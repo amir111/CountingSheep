@@ -13,6 +13,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import javax.swing.JScrollBar;
+
+import java.util.Iterator;
 
 public class managerViewRoomOnly extends JFrame {
 
@@ -47,6 +52,7 @@ public class managerViewRoomOnly extends JFrame {
 	private JTextField textField_27;
 	private JTextField textField_28;
 	private JTextField textField_29;
+        private JScrollPane sp;
         static User currentUser;
 
 	/**
@@ -74,7 +80,7 @@ public class managerViewRoomOnly extends JFrame {
 	public managerViewRoomOnly(User user) {
                 currentUser = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1366, 994);
+		setBounds(100, 100, 774, 476);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setBackground(SystemColor.activeCaption);
@@ -83,7 +89,7 @@ public class managerViewRoomOnly extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("View Room\r\n");
 		lblNewLabel.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 70));
-		lblNewLabel.setBounds(486, 13, 427, 103);
+		lblNewLabel.setBounds(186, 13, 427, 103);
 		contentPane.add(lblNewLabel);
 		
 		JButton btnCloseApplication = new JButton("Main Menu");
@@ -95,12 +101,45 @@ public class managerViewRoomOnly extends JFrame {
 
 			}
 		});
-		btnCloseApplication.setForeground(new Color(255, 0, 0));
+                
+                btnCloseApplication.setForeground(new Color(255, 0, 0));
 		btnCloseApplication.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		btnCloseApplication.setBounds(522, 854, 245, 55);
+		btnCloseApplication.setBounds(282, 360, 245, 55);
 		contentPane.add(btnCloseApplication);
+                
+                
+                JTextArea rooms = new JTextArea();
+                rooms.setLineWrap(true);
+                rooms.setEditable(false);
+                rooms.setVisible(true);
+                
+                sp = new JScrollPane(rooms);
+                
+                sp.setBounds(186, 125, 450, 200);
+                
+                
+                
+                rooms.setBounds(186, 125, 450, 200);
+                //contentPane.add(rooms);
+                contentPane.add(sp);
+
+     
+                Iterator iterator = DB.selectHotelByManager(user.uuid).getRoom().iterator();
+                //Hotel hotel = DB.selectHotelByManager(user.uuid);
+               // rooms.append(DB.selectHotelByManager(user.uuid).address);
+                while(iterator.hasNext()){
+                    Room room = (Room) iterator.next();
+                    rooms.append("Room Number: " + room.roomName + "\n");
+                    rooms.append("Room Price: " + String.valueOf(room.roomPrice) + "\n");
+                    rooms.append("Description: " + room.roomDescription + "\n");
+                    rooms.append("\n");
+                    
+                    //rooms.append("g");
+                    
+                }
+
 		
-		JLabel lblRoomId = new JLabel("Room #");
+		/*JLabel lblRoomId = new JLabel("Room #");
 		lblRoomId.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		lblRoomId.setBounds(66, 174, 127, 34);
 		contentPane.add(lblRoomId);
@@ -429,7 +468,7 @@ public class managerViewRoomOnly extends JFrame {
 		textField_29 = new JTextField();
 		textField_29.setColumns(10);
 		textField_29.setBounds(1153, 552, 146, 31);
-		contentPane.add(textField_29);
+		contentPane.add(textField_29);*/
 		
 	
 	}
