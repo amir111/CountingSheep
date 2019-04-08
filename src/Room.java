@@ -4,6 +4,7 @@ public class Room extends Hotel {
     float roomPrice;
     int roomID;
     String roomDescription;
+    boolean booked;
     
     public Room(){
         
@@ -40,4 +41,14 @@ public class Room extends Hotel {
     public void setRoomDescription(String _roomDescription){
         roomDescription = _roomDescription;
     }
+
+    public boolean isBooked() {
+        return booked;
+    }
+
+    public void setBooked(boolean booked) {
+        this.booked = booked;
+    }
+    
+    
 }
