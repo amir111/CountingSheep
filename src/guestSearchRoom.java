@@ -214,6 +214,7 @@ public class guestSearchRoom extends JFrame {
 
                     rooms = DB.selectRooms(inputPrice, textField.getText());
                     String startDate = startYear.getText() + "-" + startMonth.getText() + "-" + startDay.getText();
+                    String endDate = endYear.getText() + "-" + endMonth.getText() + "-" + endDay.getText();
                     //
                     ArrayList<RequestBooking> bookings;
                     for (int i = 0; i < rooms.size(); i++) {
@@ -224,7 +225,6 @@ public class guestSearchRoom extends JFrame {
                                     Integer.valueOf(endMonth.getText().trim()), Integer.valueOf(endDay.getText().trim()), bookings.get(j).getStart_date(), bookings.get(j).getEnd_date())) {
 
                             } else {
-                                //JOptionPane.showMessageDialog(btnSearch, "CC Invalid, please enter a 16 digit card number that has no letters and doesn't start with 0");
                                 rooms.remove(i);
                                 i--;
                                 break;
@@ -232,13 +232,6 @@ public class guestSearchRoom extends JFrame {
                         }
                     }
 
-//System.out.println(startDate);
-                    String endDate = "1997-08-25";
-                    //checkDateOverlap
-
-//                    String startDate = "1997-08-23";
-//                    String endDate = "1997-08-25";
-                    //NOTE: Process this list and remove rooms that have bookings that conflict with inputed dates here
                     guestBookRoom broom = new guestBookRoom(currentUser, rooms, startDate, endDate);
                     broom.setVisible(true);
                     close();
