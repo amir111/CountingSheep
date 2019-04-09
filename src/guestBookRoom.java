@@ -214,6 +214,8 @@ public class guestBookRoom extends JFrame {
         chosenRoom = new JTextField();
         panel_1.add(chosenRoom);
         chosenRoom.setColumns(15);
+                                chosenRoom.setFont(new Font("Arial Black",Font.PLAIN, 12));
+
 
         JButton button_5 = new JButton("Book");
         button_5.setFont(new Font("Arial Black", Font.PLAIN, 20));
