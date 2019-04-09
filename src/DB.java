@@ -81,7 +81,7 @@ public class DB {
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Booking b, Room r, Hotel h WHERE b.room_id = r.room_id AND r.hotel_id = h.hotel_id AND b.customer_id = " + clientUuid);
+            ResultSet rs = statement.executeQuery("SELECT * FROM Booking b, Room r, Hotel h WHERE b.room_id = r.room_id AND r.hotel_id = h.hotel_id AND b.customer_id = " + clientUuid + "  AND b.end_date >= date(now())");
             while (rs.next()) {
                 Room newRoom = new Room();
                 newRoom.setAddress(rs.getString("address"));
@@ -124,7 +124,7 @@ public class DB {
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id AND h.hotel_id = "+hotel.getHotelID()+" AND r.room_id IN (SELECT room_id FROM Booking WHERE now() < end_date)");
+            ResultSet rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id AND h.hotel_id = "+hotel.getHotelID()+" AND r.room_id IN (SELECT room_id FROM Booking WHERE date(now()) <= end_date)");
             while (rs.next()) {
                 Room newRoom = new Room();
                 newRoom.setAddress(rs.getString("address"));
@@ -137,6 +137,7 @@ public class DB {
                 newRoom.setState(rs.getString("state"));
                 newRoom.setRating(rs.getInt("rating"));
                 newRoom.setBooked(true);
+                newRoom.setBookings(DB.selectBookingsByRoom(newRoom.getRoomID()));
                 if (rs.getInt("pool") == 1) {
                     newRoom.setPool(true);
                 } else {

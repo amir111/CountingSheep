@@ -1,10 +1,13 @@
+import java.util.ArrayList;
 
 public class Room extends Hotel {
     int roomName;
     float roomPrice;
     int roomID;
     String roomDescription;
+    //For DB.selectBookedRooms()
     boolean booked;
+    ArrayList<RequestBooking> bookings;
     
     public Room(){
         
@@ -48,6 +51,18 @@ public class Room extends Hotel {
 
     public void setBooked(boolean booked) {
         this.booked = booked;
+    }
+
+    public ArrayList<RequestBooking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(ArrayList<RequestBooking> bookings) {
+        this.bookings = bookings;
+    }
+    
+    public void addBooking(RequestBooking addition){
+        this.bookings.add(addition);
     }
     
     
