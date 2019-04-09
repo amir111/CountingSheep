@@ -21,6 +21,7 @@ public class guestRequest extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
         static User currentUser;
+        static RequestBooking currentBooking;
 
 	/**
 	 * Launch the application.
@@ -29,7 +30,7 @@ public class guestRequest extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					guestRequest frame = new guestRequest(currentUser);
+					guestRequest frame = new guestRequest(currentUser,currentBooking);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,8 +46,9 @@ public class guestRequest extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public guestRequest(User user) {
+	public guestRequest(User user,RequestBooking booking) {
                 currentUser = user;
+                currentBooking = booking;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 476 );
 		contentPane = new JPanel();
@@ -100,6 +102,16 @@ public class guestRequest extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(lblGuestRequest, "Request Submitted");
 				
+                                if(!textField.getText().trim().equals("")){ //this is for food
+                                   DB.insertNewRequest(textField.getText(), "food", WIDTH, currentUser.getUuid());
+                               }
+                               else if(!textField_1.getText().trim().equals("")) { //this is for maintenance
+                                   DB.insertNewRequest(textField_1.getText(), "maintenance", WIDTH, currentUser.getUuid());
+                               }
+                               else if(!textField_2.getText().trim().equals("")){ //this is for other
+                                   DB.insertNewRequest(textField_2.getText(), "other", WIDTH, currentUser.getUuid());
+                               } 
+                                
 				guestPortfolio guest1 = new guestPortfolio(currentUser);
 				guest1.setVisible(true);
 				close();
