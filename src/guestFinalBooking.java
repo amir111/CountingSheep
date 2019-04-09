@@ -104,8 +104,12 @@ public class guestFinalBooking extends JFrame {
         btnBookNow.setFont(new Font("Arial Black", Font.PLAIN, 20));
         btnBookNow.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                DB.insertNewBooking(startBooking, endBooking, currentUser.getUuid(), currentRooms.get(chosenRoom).getRoomID());
-                JOptionPane.showMessageDialog(lblFinalBooking, "You are BOOKED");
+                if (CheckCreditCard.CheckTheCC(Long.valueOf(textField.getText().trim()))) {
+                    DB.insertNewBooking(startBooking, endBooking, currentUser.getUuid(), currentRooms.get(chosenRoom).getRoomID());
+                    JOptionPane.showMessageDialog(lblFinalBooking, "You are BOOKED");
+                } else {
+                    JOptionPane.showMessageDialog(btnBookNow, "CC Invalid, please enter a 16 digit card number that has no letters and doesn't start with 0");
+                }
 
                 guestPortfolio guest1 = new guestPortfolio(currentUser);
                 guest1.setVisible(true);
@@ -123,9 +127,9 @@ public class guestFinalBooking extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //String cc = "1234567812345678";
                 //call checkcreditcard.java, return false or true 
-                        //cc.equals("1234567812345678")
+                //cc.equals("1234567812345678")
                 if (CheckCreditCard.CheckTheCC(Long.valueOf(textField.getText().trim()))) {
-                    JOptionPane.showMessageDialog(btnBookNow, "CC Valid"); 
+                    JOptionPane.showMessageDialog(btnBookNow, "CC Valid");
                 } else {
                     JOptionPane.showMessageDialog(btnBookNow, "CC Invalid, please enter a 16 digit card number that has no letters and doesn't start with 0");
                 }
