@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 public class managerRequest extends JFrame {
@@ -55,6 +56,7 @@ public class managerRequest extends JFrame {
 		lblNewLabel.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 70));
 		lblNewLabel.setBounds(188, 13, 656, 103);
 		contentPane.add(lblNewLabel);
+                
 		
 		JButton btnRoomModificaton = new JButton("Completed ");
 		btnRoomModificaton.setFont(new Font("Arial Black", Font.PLAIN, 20));
