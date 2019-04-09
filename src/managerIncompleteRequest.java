@@ -83,13 +83,17 @@ public class managerIncompleteRequest extends JFrame {
                 scroll.setBounds(50,175,600,150);
                 contentPane.add(scroll);
                 
-                Iterator requestList = DB.selectRequestsByManager(user.uuid, true).iterator();
+                Iterator requestList = DB.selectRequestsByManager(user.uuid, false).iterator();
                 
                 while(requestList.hasNext()){
                     PersonalRequest currentReq = (PersonalRequest) requestList.next();
                     request.append("Customer: " + "\n");
                     request.append("Category: " + currentReq.category + "\n");
                     request.append("Description: " + currentReq.desc + "\n");
+                    JCheckBox chckbxComplete = new JCheckBox("Complete");
+		    //chckbxComplete.setBounds(620, 186, 113, 25);
+		    //contentPane.add(chckbxComplete);
+                    request.add(chckbxComplete);
                     request.append("\n");
                 }
 		
