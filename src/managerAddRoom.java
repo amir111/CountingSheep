@@ -96,17 +96,20 @@ public class managerAddRoom extends JFrame {
 		textField.setBounds(239, 142, 137, 32);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		
+		textField.setFont(new Font("Arial Black",Font.PLAIN, 20));
+                        
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
 		textField_1.setBounds(239, 187, 137, 32);
 		contentPane.add(textField_1);
-		
+		textField_1.setFont(new Font("Arial Black",Font.PLAIN, 20));
 		
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
 		textField_3.setBounds(546, 139, 137, 32);
+                textField_3.setFont(new Font("Arial Black",Font.PLAIN, 20));
+                
 		contentPane.add(textField_3);
 		
 		

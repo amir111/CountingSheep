@@ -108,6 +108,7 @@ public class managerDeleteRoom extends JFrame {
 		textField.setBounds(299, 193, 116, 32);
 		contentPane.add(textField);
 		textField.setColumns(10);
+                textField.setFont(new Font("Arial Black",Font.PLAIN, 20));
 
 }
 }

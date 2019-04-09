@@ -101,26 +101,31 @@ public class guestSearchRoom extends JFrame {
         textField.setBounds(295, 144, 153, 36);
         contentPane.add(textField);
         textField.setColumns(10);
+        textField.setFont(new Font("Arial Black", Font.PLAIN, 12));
 
         textField_1 = new JTextField();
         textField_1.setBounds(295, 193, 153, 36);
         contentPane.add(textField_1);
         textField_1.setColumns(10);
+        textField_1.setFont(new Font("Arial Black", Font.PLAIN, 12));
 
         startMonth = new JTextField();
         startMonth.setBounds(295, 247, 30, 36);
         contentPane.add(startMonth);
         startMonth.setColumns(2);
+        startMonth.setFont(new Font("Arial Black", Font.PLAIN, 12));
 
         startDay = new JTextField();
         startDay.setBounds(330, 247, 30, 36);
         contentPane.add(startDay);
         startDay.setColumns(2);
+        startDay.setFont(new Font("Arial Black", Font.PLAIN, 12));
 
         startYear = new JTextField();
         startYear.setBounds(365, 247, 50, 36);
         contentPane.add(startYear);
         startYear.setColumns(2);
+        startYear.setFont(new Font("Arial Black", Font.PLAIN, 12));
 
         JLabel lblDate2 = new JLabel("to");
         lblDate2.setFont(new Font("Arial Black", Font.PLAIN, 20));
@@ -131,16 +136,19 @@ public class guestSearchRoom extends JFrame {
         endMonth.setBounds(480, 247, 30, 36);
         contentPane.add(endMonth);
         endMonth.setColumns(2);
+        endMonth.setFont(new Font("Arial Black", Font.PLAIN, 12));
 
         endDay = new JTextField();
         endDay.setBounds(515, 247, 30, 36);
         contentPane.add(endDay);
         endDay.setColumns(2);
+        endDay.setFont(new Font("Arial Black", Font.PLAIN, 12));
 
         endYear = new JTextField();
         endYear.setBounds(550, 247, 50, 36);
         contentPane.add(endYear);
         endYear.setColumns(2);
+        endYear.setFont(new Font("Arial Black", Font.PLAIN, 12));
 
         JButton btnSearch = new JButton("Search");
         btnSearch.setFont(new Font("Arial Black", Font.PLAIN, 20));
@@ -235,7 +243,7 @@ public class guestSearchRoom extends JFrame {
                     broom.setVisible(true);
                     close();
                 } catch (Exception excep) {
-                    JOptionPane.showMessageDialog(btnSearch, "Invalid Input");
+                   // JOptionPane.showMessageDialog(btnSearch, "Invalid Input");
                 }
             }
         }

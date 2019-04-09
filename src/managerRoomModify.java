@@ -127,16 +127,19 @@ public class managerRoomModify extends JFrame {
 		textField.setBounds(280, 151, 136, 32);
 		contentPane.add(textField);
 		textField.setColumns(10);
+                textField.setFont(new Font("Arial Black",Font.PLAIN, 20));
 		
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
 		textField_4.setBounds(280, 215, 136, 32);
 		contentPane.add(textField_4);
+                textField_4.setFont(new Font("Arial Black",Font.PLAIN, 20));
                 
                 textField_5 = new JTextField();
 		textField_5.setColumns(10);
 		textField_5.setBounds(280, 279, 136, 32);
 		contentPane.add(textField_5);
+                textField_5.setFont(new Font("Arial Black",Font.PLAIN, 20));
 	}
 
 }
