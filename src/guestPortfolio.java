@@ -36,6 +36,7 @@ public class guestPortfolio extends JFrame {
     private JTextField textField_1;
     private JTextField textField_2;
     public static User currentUser;
+    public static RequestBooking currentBooking;
 
     /**
      * Launch the application.
@@ -63,6 +64,18 @@ public class guestPortfolio extends JFrame {
      */
     public guestPortfolio(User user) {
         currentUser = user;
+        //
+        boolean booked = false;
+        try {
+            currentBooking = DB.selectCurrentBooking(user.getUuid());
+            if(currentBooking == null){
+                throw new Exception();
+            }
+            booked = true;
+        } catch (Exception e) {
+
+        }
+        //
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 774, 476);
         contentPane = new JPanel();
@@ -119,18 +132,19 @@ public class guestPortfolio extends JFrame {
         btnBookRoom.setBounds(513, 198, 177, 49);
         contentPane.add(btnBookRoom);
 
-        JButton btnRequest = new JButton("Request");
-        btnRequest.setFont(new Font("Arial Black", Font.PLAIN, 20));
-        btnRequest.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                guestRequest greq = new guestRequest(currentUser);
-                greq.setVisible(true);
-                close();
-            }
-        });
-        btnRequest.setBounds(513, 277, 177, 49);
-        contentPane.add(btnRequest);
-
+        if (booked) {
+            JButton btnRequest = new JButton("Request");
+            btnRequest.setFont(new Font("Arial Black", Font.PLAIN, 20));
+            btnRequest.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    guestRequest greq = new guestRequest(currentUser,currentBooking);
+                    greq.setVisible(true);
+                    close();
+                }
+            });
+            btnRequest.setBounds(513, 277, 177, 49);
+            contentPane.add(btnRequest);
+        }
         JButton btnLogout = new JButton("Close Application");
         btnLogout.setForeground(Color.RED);
         btnLogout.setFont(new Font("Arial Black", Font.PLAIN, 20));
@@ -157,7 +171,7 @@ public class guestPortfolio extends JFrame {
         JPanel panel_2 = new JPanel();
         panel_2.setBounds(62, 301, 210, 26);
         contentPane.add(panel_2);
-                //ADDED BUTTON
+        //ADDED BUTTON
         //CHANGES THE PASSWORD
 
         JButton changePassword = new JButton("Change Password\r\n");
@@ -185,19 +199,19 @@ public class guestPortfolio extends JFrame {
         panel.add(textField);
         textField.setColumns(15);
         //changes font
-        textField.setFont(new Font("Arial Black",Font.PLAIN, 12));
+        textField.setFont(new Font("Arial Black", Font.PLAIN, 12));
 
         textField_1 = new JTextField();
         textField_1.setText(currentUser.getEmail());
         textField_1.setEditable(false);
         panel_1.add(textField_1);
         textField_1.setColumns(15);
-        textField_1.setFont(new Font("Arial Black",Font.PLAIN, 12));
+        textField_1.setFont(new Font("Arial Black", Font.PLAIN, 12));
 
         textField_2 = new JTextField();
         panel_2.add(textField_2);
         textField_2.setColumns(15);
-        textField_2.setFont(new Font("Arial Black",Font.PLAIN, 12));
+        textField_2.setFont(new Font("Arial Black", Font.PLAIN, 12));
 
     }
 }
