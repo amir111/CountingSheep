@@ -19,7 +19,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.lang.Integer;
 import javax.swing.JOptionPane;
-
+  
 public class guestBookRoom extends JFrame {
 
     private JPanel contentPane;
@@ -53,6 +53,8 @@ public class guestBookRoom extends JFrame {
     /**
      * Create the frame.
      */
+    
+    
     public guestBookRoom(User user, ArrayList<Room> rooms, String startDate, String endDate) {
         currentUser = user;
         currentRooms = rooms;
