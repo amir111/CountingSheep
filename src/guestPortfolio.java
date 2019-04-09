@@ -184,16 +184,20 @@ public class guestPortfolio extends JFrame {
         textField.setEditable(false);
         panel.add(textField);
         textField.setColumns(15);
+        //changes font
+        textField.setFont(new Font("Arial Black",Font.PLAIN, 12));
 
         textField_1 = new JTextField();
         textField_1.setText(currentUser.getEmail());
         textField_1.setEditable(false);
         panel_1.add(textField_1);
         textField_1.setColumns(15);
+        textField_1.setFont(new Font("Arial Black",Font.PLAIN, 12));
 
         textField_2 = new JTextField();
         panel_2.add(textField_2);
         textField_2.setColumns(15);
+        textField_2.setFont(new Font("Arial Black",Font.PLAIN, 12));
 
     }
 }
