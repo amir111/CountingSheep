@@ -75,7 +75,7 @@ public class guestRequest extends JFrame {
 
         JLabel lblMaintance = new JLabel("Maintenance");
         lblMaintance.setFont(new Font("Arial Black", Font.PLAIN, 20));
-        lblMaintance.setBounds(102, 202, 121, 38);
+        lblMaintance.setBounds(92, 202, 150, 38);
         contentPane.add(lblMaintance);
 
         JLabel lblOther = new JLabel("Other");

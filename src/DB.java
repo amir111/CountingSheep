@@ -150,6 +150,28 @@ public class DB {
         return roomList;
     }
     
+    public static ArrayList<RequestBooking> selectClientBookings(int clientUuid){
+        ArrayList<RequestBooking> bookings = new ArrayList<>();
+        Connection conn = connect();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Booking WHERE customer_id = " + clientUuid);
+            while (rs.next()) {
+                RequestBooking newBooking = new RequestBooking();
+                newBooking.setRoom_id(rs.getInt("room_id"));
+                newBooking.setStart_date(rs.getString("start_date"));
+                newBooking.setEnd_date(rs.getString("end_date"));
+                newBooking.setCustomer_id(rs.getInt("customer_id"));
+                newBooking.setBooking_id(rs.getInt("booking_id"));
+                bookings.add(newBooking);
+            }
+            conn.close();
+        } catch (Exception e) {
+            throw new IllegalStateException("", e);
+        }
+        return bookings;
+    }
+    
     //Returns a list of all rooms in a hotel, and whether or not the rooms are booked
     public static ArrayList<Room> selectBookedRooms(int managerUuid) {
         ArrayList<Room> roomList = new ArrayList<>();
@@ -323,7 +345,6 @@ public class DB {
         return bookings;
     }
 
-    //NOTE: Timestamps a little buggy but it does contain all important information thats in the database
     //Returns a list of requests made by a specific client
     public static ArrayList<PersonalRequest> selectRequestsByClient(int clientUuid, int managerUuid) {
         ArrayList<PersonalRequest> requests = new ArrayList<>();
