@@ -19,7 +19,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.lang.Integer;
 import javax.swing.JOptionPane;
-
+  
 public class guestBookRoom extends JFrame {
 
     private JPanel contentPane;
@@ -53,6 +53,8 @@ public class guestBookRoom extends JFrame {
     /**
      * Create the frame.
      */
+    
+    
     public guestBookRoom(User user, ArrayList<Room> rooms, String startDate, String endDate) {
         currentUser = user;
         currentRooms = rooms;
@@ -214,6 +216,8 @@ public class guestBookRoom extends JFrame {
         chosenRoom = new JTextField();
         panel_1.add(chosenRoom);
         chosenRoom.setColumns(15);
+                                chosenRoom.setFont(new Font("Arial Black",Font.PLAIN, 12));
+
 
         JButton button_5 = new JButton("Book");
         button_5.setFont(new Font("Arial Black", Font.PLAIN, 20));
