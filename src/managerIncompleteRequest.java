@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JCheckBox;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class managerIncompleteRequest extends JFrame {
 
@@ -69,8 +72,28 @@ public class managerIncompleteRequest extends JFrame {
 		btnCloseApplication.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		btnCloseApplication.setBounds(229, 332, 245, 55);
 		contentPane.add(btnCloseApplication);
+                
+                                JTextArea request = new JTextArea();
+                request.setLineWrap(true);
+                request.setEditable(false);
+                request.setVisible(true);
+                
+                JScrollPane scroll = new JScrollPane(request);
+                scroll.setVisible(true);
+                scroll.setBounds(50,175,600,150);
+                contentPane.add(scroll);
+                
+                Iterator requestList = DB.selectRequestsByManager(user.uuid, true).iterator();
+                
+                while(requestList.hasNext()){
+                    PersonalRequest currentReq = (PersonalRequest) requestList.next();
+                    request.append("Customer: " + "\n");
+                    request.append("Category: " + currentReq.category + "\n");
+                    request.append("Description: " + currentReq.desc + "\n");
+                    request.append("\n");
+                }
 		
-		JLabel lblCustomerName = new JLabel("Customer Name");
+		/*JLabel lblCustomerName = new JLabel("Customer Name");
 		lblCustomerName.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		lblCustomerName.setBounds(55, 146, 221, 21);
 		contentPane.add(lblCustomerName);
@@ -114,6 +137,6 @@ public class managerIncompleteRequest extends JFrame {
 		
 		JCheckBox checkBox_1 = new JCheckBox("Complete");
 		checkBox_1.setBounds(606, 270, 113, 25);
-		contentPane.add(checkBox_1);
+		contentPane.add(checkBox_1);*/
 	}
 }
