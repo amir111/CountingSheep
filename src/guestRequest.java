@@ -68,7 +68,7 @@ public class guestRequest extends JFrame {
 		lblFoood.setBounds(102, 151, 121, 38);
 		contentPane.add(lblFoood);
 		
-		JLabel lblMaintance = new JLabel("Maintance");
+		JLabel lblMaintance = new JLabel("Maintenance");
 		lblMaintance.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		lblMaintance.setBounds(102, 202, 121, 38);
 		contentPane.add(lblMaintance); 
@@ -100,8 +100,21 @@ public class guestRequest extends JFrame {
 		btnSubmit.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(lblGuestRequest, "Request Submitted");
 				
+				
+                                if(!textField.getText().trim().equals("")){ //this is for food
+                                   DB.insertNewRequest(textField.getText(), "food", DB.getManagerOfMyBooking(currentBooking), currentUser.getUuid());
+                                   JOptionPane.showMessageDialog(lblGuestRequest, "Request Food Submitted");
+                               }
+                               else if(!textField_1.getText().trim().equals("")) { //this is for maintenance
+                                   DB.insertNewRequest(textField_1.getText(), "maintenance", DB.getManagerOfMyBooking(currentBooking), currentUser.getUuid());
+                                   JOptionPane.showMessageDialog(lblGuestRequest, "Request Maintenance Submitted");
+                               }
+                               else if(!textField_2.getText().trim().equals("")){ //this is for other
+                                   DB.insertNewRequest(textField_2.getText(), "other", DB.getManagerOfMyBooking(currentBooking), currentUser.getUuid());
+                                   JOptionPane.showMessageDialog(lblGuestRequest, "Request Other Submitted");
+                               } 
+                                
 				guestPortfolio guest1 = new guestPortfolio(currentUser);
 				guest1.setVisible(true);
 				close();
