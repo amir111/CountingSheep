@@ -8,6 +8,8 @@ public class PersonalRequest {
     protected Timestamp completionTime;
     protected int managerId;
     protected int customerId;
+    //
+    protected String customerName;
 
     public PersonalRequest() {
     }
@@ -66,6 +68,14 @@ public class PersonalRequest {
 
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
     
     
