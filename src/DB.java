@@ -48,6 +48,38 @@ public class DB {
         }
         return false;
     }
+    
+    public static int getManagerOfMyBooking(RequestBooking booking){
+        int managerUuid = -1;
+        Connection conn = connect();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT user_id FROM Booking b, Room r, Hotel h, User u WHERE b.room_id = r.room_id AND r.hotel_id = h.hotel_id AND h.manager_id = u.user_id AND booking_id = "+ booking.getBooking_id());
+            if (rs.next()) {
+                managerUuid = rs.getInt("user_id");
+            }
+            conn.close();
+        } catch (Exception e) {
+            throw new IllegalStateException("", e);
+        }
+        return managerUuid;
+    }
+    
+    public static String getUsernameFromRequest(PersonalRequest request) {
+        String uname = "";
+        Connection conn = connect();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT uname FROM User u, Request r WHERE r.customer_id = u.user_id AND r.request_id = 1");
+            if (rs.next()) {
+                uname = rs.getString("uname");
+            }
+            conn.close();
+        } catch (Exception e) {
+            throw new IllegalStateException("", e);
+        }
+        return uname;
+    }
 
     //Used to obtain a specific user's data for login or displaying a manger of a hotel's contact information
     public static User selectTargetUser(String uname) {
@@ -198,7 +230,7 @@ public class DB {
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Booking WHERE customer_id = " + clientUuid + " AND now() BETWEEN start_date AND end_date");
+            ResultSet rs = statement.executeQuery("SELECT * FROM Booking WHERE customer_id = " + clientUuid + " AND date(now()) BETWEEN start_date AND end_date");
             if (rs.next()) {
                 current.setRoom_id(rs.getInt("room_id"));
                 current.setStart_date(rs.getString("start_date"));
@@ -337,6 +369,7 @@ public class DB {
                 newReq.setDesc(rs.getString("description"));
                 newReq.setManagerId(rs.getInt("manager_id"));
                 newReq.setRequestId(rs.getInt("request_id"));
+                newReq.setCustomerName(DB.getUsernameFromRequest(newReq));
                 requests.add(newReq);
             }
             conn.close();
