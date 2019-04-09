@@ -116,13 +116,14 @@ public class managerViewRoomOnly extends JFrame {
                 sp = new JScrollPane(rooms);
                 
                 sp.setBounds(186, 125, 450, 200);
+                sp.setFont(new Font("Arial Black",Font.PLAIN, 20));
                 
                 
                 
                 rooms.setBounds(186, 125, 450, 200);
                 //contentPane.add(rooms);
                 contentPane.add(sp);
-
+                rooms.setFont(new Font("Arial Black",Font.PLAIN, 20));
      
                 Iterator iterator = DB.selectHotelByManager(user.uuid).getRoom().iterator();
                 //Hotel hotel = DB.selectHotelByManager(user.uuid);
