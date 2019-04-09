@@ -99,6 +99,7 @@ public class guestBookRoom extends JFrame {
 
             panel = new JPanel();
             panel.setBounds(startingX + 150, startingY, 150, 25);
+            
 
             textField = new JTextField();
             textField.setText(currentRooms.get(i).getName());
@@ -106,6 +107,9 @@ public class guestBookRoom extends JFrame {
             panel.add(textField);
             textField.setColumns(12);
             contentPane.add(panel);
+            textField.setFont(new Font("Arial Black",Font.PLAIN, 12));
+
+
 
             JLabel label_23 = new JLabel("Address");
             label_23.setFont(new Font("Arial Black", Font.PLAIN, 20));
@@ -120,6 +124,8 @@ public class guestBookRoom extends JFrame {
             panel.add(textField);
             textField.setColumns(12);
             contentPane.add(panel);
+                        textField.setFont(new Font("Arial Black",Font.PLAIN, 9));
+
 
             JLabel label_20 = new JLabel("Price ");
             label_20.setFont(new Font("Arial Black", Font.PLAIN, 20));
@@ -134,6 +140,8 @@ public class guestBookRoom extends JFrame {
             panel.add(textField);
             textField.setColumns(12);
             contentPane.add(panel);
+                        textField.setFont(new Font("Arial Black",Font.PLAIN, 12));
+
 
             JLabel label_29 = new JLabel("Features");
             label_29.setFont(new Font("Arial Black", Font.PLAIN, 20));
@@ -148,6 +156,8 @@ public class guestBookRoom extends JFrame {
             panel.add(textField);
             textField.setColumns(12);
             contentPane.add(panel);
+                        textField.setFont(new Font("Arial Black",Font.PLAIN, 12));
+
 
             JLabel label_26 = new JLabel("Rating ");
             label_26.setFont(new Font("Arial Black", Font.PLAIN, 20));
@@ -162,6 +172,8 @@ public class guestBookRoom extends JFrame {
             panel.add(textField);
             textField.setColumns(12);
             contentPane.add(panel);
+                        textField.setFont(new Font("Arial Black",Font.PLAIN, 12));
+
 
             JLabel label_36 = new JLabel("Room #  ");
             label_36.setFont(new Font("Arial Black", Font.PLAIN, 20));
@@ -176,6 +188,8 @@ public class guestBookRoom extends JFrame {
             panel.add(textField);
             textField.setColumns(12);
             contentPane.add(panel);
+                        textField.setFont(new Font("Arial Black",Font.PLAIN, 12));
+
 
             JLabel label_55 = new JLabel("Choice #" + i);
             label_55.setFont(new Font("Arial Black", Font.PLAIN, 20));

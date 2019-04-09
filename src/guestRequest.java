@@ -80,16 +80,19 @@ public class guestRequest extends JFrame {
 		textField.setBounds(235, 162, 116, 22);
 		contentPane.add(textField);
 		textField.setColumns(10);
+                textField.setFont(new Font("Arial Black",Font.PLAIN, 12));
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(235, 213, 116, 22);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
+                textField_1.setFont(new Font("Arial Black",Font.PLAIN, 12));
 		
 		textField_2 = new JTextField();
 		textField_2.setBounds(235, 262, 116, 22);
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
+                textField_2.setFont(new Font("Arial Black",Font.PLAIN, 12));
 		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.setFont(new Font("Arial Black", Font.PLAIN, 20));
