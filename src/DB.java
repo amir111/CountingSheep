@@ -124,6 +124,7 @@ public class DB {
                 newRoom.setRoomName(rs.getInt("number"));
                 newRoom.setRoomPrice(rs.getFloat("price"));
                 newRoom.setState(rs.getString("state"));
+                newRoom.setHotelID(rs.getInt("hotel_id"));
                 newRoom.setRating(rs.getInt("rating"));
                 if (rs.getInt("pool") == 1) {
                     newRoom.setPool(true);
