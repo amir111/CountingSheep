@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 public class managerCompletedRequest extends JFrame {
@@ -73,8 +74,12 @@ public class managerCompletedRequest extends JFrame {
 		lblCustomerName.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		lblCustomerName.setBounds(55, 146, 221, 21);
 		contentPane.add(lblCustomerName);
+                
+                JScrollPane scroll = new JScrollPane();
+                scroll.setVisible(true);
+                scroll.setBounds(100, 100, 774, 476);
 		
-		JPanel panel = new JPanel();
+		/*JPanel panel = new JPanel();
 		panel.setBounds(55, 186, 183, 21);
 		contentPane.add(panel);
 		
@@ -84,14 +89,14 @@ public class managerCompletedRequest extends JFrame {
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(55, 260, 183, 21);
-		contentPane.add(panel_2);
+		contentPane.add(panel_2);*/
 		
 		JLabel lblCustomerRequest = new JLabel("Customer Request\r\n");
 		lblCustomerRequest.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		lblCustomerRequest.setBounds(405, 151, 221, 21);
 		contentPane.add(lblCustomerRequest);
 		
-		JPanel panel_3 = new JPanel();
+		/*JPanel panel_3 = new JPanel();
 		panel_3.setBounds(415, 186, 183, 21);
 		contentPane.add(panel_3);
 		
@@ -101,7 +106,7 @@ public class managerCompletedRequest extends JFrame {
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBounds(415, 260, 183, 21);
-		contentPane.add(panel_5);
+		contentPane.add(panel_5);*/
 	}
 
 }
