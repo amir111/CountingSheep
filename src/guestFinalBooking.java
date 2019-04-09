@@ -104,10 +104,14 @@ public class guestFinalBooking extends JFrame {
         btnBookNow.setFont(new Font("Arial Black", Font.PLAIN, 20));
         btnBookNow.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (CheckCreditCard.CheckTheCC(Long.valueOf(textField.getText().trim()))) {
-                    DB.insertNewBooking(startBooking, endBooking, currentUser.getUuid(), currentRooms.get(chosenRoom).getRoomID());
-                    JOptionPane.showMessageDialog(lblFinalBooking, "You are BOOKED");
-                } else {
+                try {
+                    if (CheckCreditCard.CheckTheCC(Long.valueOf(textField.getText().trim()))) {
+                        DB.insertNewBooking(startBooking, endBooking, currentUser.getUuid(), currentRooms.get(chosenRoom).getRoomID());
+                        JOptionPane.showMessageDialog(lblFinalBooking, "You are BOOKED");
+                    } else {
+                        throw new Exception();
+                    }
+                } catch (Exception excep) {
                     JOptionPane.showMessageDialog(btnBookNow, "CC Invalid, please enter a 16 digit card number that has no letters and doesn't start with 0");
                 }
 
@@ -128,9 +132,13 @@ public class guestFinalBooking extends JFrame {
                 //String cc = "1234567812345678";
                 //call checkcreditcard.java, return false or true 
                 //cc.equals("1234567812345678")
-                if (CheckCreditCard.CheckTheCC(Long.valueOf(textField.getText().trim()))) {
-                    JOptionPane.showMessageDialog(btnBookNow, "CC Valid");
-                } else {
+                try {
+                    if (CheckCreditCard.CheckTheCC(Long.valueOf(textField.getText().trim()))) {
+                        JOptionPane.showMessageDialog(btnBookNow, "CC Valid");
+                    } else {
+                        throw new Exception();
+                    }
+                } catch (Exception excep) {
                     JOptionPane.showMessageDialog(btnBookNow, "CC Invalid, please enter a 16 digit card number that has no letters and doesn't start with 0");
                 }
 
