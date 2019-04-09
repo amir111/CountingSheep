@@ -96,6 +96,11 @@ public class guestSearchRoom extends JFrame {
         lblDate.setFont(new Font("Arial Black", Font.PLAIN, 20));
         lblDate.setBounds(191, 247, 65, 16);
         contentPane.add(lblDate);
+        
+        JLabel lblFormat = new JLabel("Format MM-DD-YYYY");
+        lblFormat.setFont(new Font("Arial Black", Font.PLAIN, 20));
+        lblFormat.setBounds(191, 300, 500, 16);
+        contentPane.add(lblFormat);
 
         textField = new JTextField();
         textField.setBounds(295, 144, 153, 36);
@@ -210,6 +215,19 @@ public class guestSearchRoom extends JFrame {
                     } else {
                         JOptionPane.showMessageDialog(btnSearch, "Invalid end Year Entered, must be a 4 digit number that does not start with 0");
                         throw new Exception();
+                    }
+                    
+                    ArrayList<RequestBooking> previousBookings = DB.selectClientBookings(currentUser.getUuid());
+                    for (int j = 0; j < previousBookings.size(); j++) {
+                            if (CheckDateOverlap.CheckTheDatesPlox(Integer.valueOf(startYear.getText().trim()), Integer.valueOf(startMonth.getText().trim()),
+                                    Integer.valueOf(startDay.getText().trim()), Integer.valueOf(endYear.getText().trim()),
+                                    Integer.valueOf(endMonth.getText().trim()), Integer.valueOf(endDay.getText().trim()), previousBookings.get(j).getStart_date(), previousBookings.get(j).getEnd_date())) {
+
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(btnSearch, "You already have a booking made around this time");
+                                throw new Exception();
+                            }
                     }
                     
                     rooms = DB.selectRooms(inputPrice, textField.getText());
