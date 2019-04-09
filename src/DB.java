@@ -325,12 +325,12 @@ public class DB {
 
     //NOTE: Timestamps a little buggy but it does contain all important information thats in the database
     //Returns a list of requests made by a specific client
-    public static ArrayList<PersonalRequest> selectRequestsByClient(int clientUuid) {
+    public static ArrayList<PersonalRequest> selectRequestsByClient(int clientUuid, int managerUuid) {
         ArrayList<PersonalRequest> requests = new ArrayList<>();
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Request WHERE customer_id = " + clientUuid);
+            ResultSet rs = statement.executeQuery("SELECT * FROM Request WHERE customer_id = " + clientUuid + " AND manager_id = " + managerUuid + " AND creation_time > (SELECT start_date FROM Booking WHERE start_date <= date(now()) AND end_date >= date(now()) AND customer_id = "+clientUuid+")");
             while (rs.next()) {
                 PersonalRequest newReq = new PersonalRequest();
                 newReq.setCategory(rs.getString("category"));

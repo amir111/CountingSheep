@@ -211,7 +211,7 @@ public class guestSearchRoom extends JFrame {
                         JOptionPane.showMessageDialog(btnSearch, "Invalid end Year Entered, must be a 4 digit number that does not start with 0");
                         throw new Exception();
                     }
-
+                    
                     rooms = DB.selectRooms(inputPrice, textField.getText());
                     String startDate = startYear.getText() + "-" + startMonth.getText() + "-" + startDay.getText();
                     String endDate = endYear.getText() + "-" + endMonth.getText() + "-" + endDay.getText();
