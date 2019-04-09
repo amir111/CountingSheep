@@ -134,6 +134,7 @@ public class managerViewRoomOnly extends JFrame {
                     rooms.append("Description: " + room.roomDescription + "\n");
                     if(room.booked){
                         rooms.append("Booking: Unavailable" + "\n");
+                        rooms.append("Start Date: ");
                         rooms.append("\n");
                     }
                     else{
