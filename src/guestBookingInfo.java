@@ -23,13 +23,13 @@ import javax.swing.JTextArea;
 public class guestBookingInfo extends JFrame {
 
     private JPanel contentPane;
-    private JTextField textField;
+    /*private JTextField textField;
     private JTextField textField_1;
     private JTextField textField_2;
     private JTextField textField_3;
     private JTextField textField_4;
     private JTextField textField_5;
-    private JTextField textField_6;
+    private JTextField textField_6;*/
     static User currentUser;
 
     /**
@@ -108,6 +108,7 @@ public class guestBookingInfo extends JFrame {
             dragons.append("Room Price: " + String.valueOf(room.roomPrice) + "\n");
             dragons.append("Description: " + room.roomDescription + "\n");
             dragons.append("Features: " + room.getFeatures() + "\n");
+            dragons.append(room.getStartDate() + " to " + room.getEndDate());
             dragons.append("\n");
                     //dragons.append("g");
         }

@@ -126,6 +126,8 @@ public class DB {
                 newRoom.setState(rs.getString("state"));
                 newRoom.setHotelID(rs.getInt("hotel_id"));
                 newRoom.setRating(rs.getInt("rating"));
+                newRoom.setStartDate(rs.getString("start_date"));
+                newRoom.setEndDate(rs.getString("end_date"));
                 if (rs.getInt("pool") == 1) {
                     newRoom.setPool(true);
                 } else {
