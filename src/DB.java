@@ -330,7 +330,7 @@ public class DB {
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Booking WHERE room_id = " + roomUuid);
+            ResultSet rs = statement.executeQuery("SELECT * FROM Booking WHERE room_id = " + roomUuid + " AND date(now()) <= end_date ORDER BY start_date");
             while (rs.next()) {
                 RequestBooking newBooking = new RequestBooking();
                 newBooking.setRoom_id(rs.getInt("room_id"));
