@@ -496,6 +496,7 @@ public class DB {
                 }
                 roomList.add(newRoom);
             }
+            hotel.setRoomList(roomList);
             conn.close();
         } catch (Exception e) {
             throw new IllegalStateException("", e);
