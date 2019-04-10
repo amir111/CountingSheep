@@ -42,6 +42,10 @@ public class Hotel {
     public void setRoom(Room _room) {
         room.add(_room);
     }
+    
+    public void setRoomList(ArrayList<Room> _room) {
+        room = _room;
+    }
 
     public void setName(String _name) {
         hotelName = _name;
