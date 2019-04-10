@@ -448,6 +448,7 @@ public class DB {
                 newRoom.setPool(hotel.isPool());
                 newRoom.setBreakfast(hotel.isBreakfast());
                 newRoom.setFoodDelivery(hotel.isFoodDelivery());
+                newRoom.setBookings(DB.selectBookingsByRoom(newRoom.getRoomID()));
                 hotel.setRoom(newRoom);
             }
             conn.close();
