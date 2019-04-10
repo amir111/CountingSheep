@@ -101,6 +101,9 @@ public class Hotel {
 
     public String getFeatures() {
         String str = "";
+        if(!breakfast && !pool && !foodDelivery){
+            return "None";
+        }
         if (breakfast) {
             str += "Breakfast, ";
         }
