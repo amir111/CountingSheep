@@ -108,7 +108,7 @@ public class guestBookingInfo extends JFrame {
             dragons.append("Room Price: " + String.valueOf(room.roomPrice) + "\n");
             dragons.append("Description: " + room.roomDescription + "\n");
             dragons.append("Features: " + room.getFeatures() + "\n");
-            dragons.append(room.getStartDate() + " to " + room.getEndDate());
+            dragons.append(room.getStartDate() + " to " + room.getEndDate() + "\n");
             dragons.append("\n");
                     //dragons.append("g");
         }
