@@ -432,27 +432,70 @@ public class DB {
                 } else {
                     hotel.setFoodDelivery(false);
                 }
-                hotel.setRoomList(DB.selectBookedRooms(managerUuid));
             }
+            ArrayList<Room> roomList = new ArrayList<>();
             
-//            rs = statement.executeQuery("SELECT * FROM Room WHERE hotel_id = '" + hotel.getHotelID() + "'");
-//            while (rs.next()) {
-//                Room newRoom = new Room();
-//                newRoom.setAddress(hotel.getAddress());
-//                newRoom.setCity(hotel.getCity());
-//                newRoom.setName(hotel.getName());
-//                newRoom.setRoomDescription(rs.getString("description"));
-//                newRoom.setRoomID(rs.getInt("room_id"));
-//                newRoom.setRoomName(rs.getInt("number"));
-//                newRoom.setRoomPrice(rs.getFloat("price"));
-//                newRoom.setState(hotel.getState());
-//                newRoom.setRating(hotel.getRating());
-//                newRoom.setPool(hotel.isPool());
-//                newRoom.setBreakfast(hotel.isBreakfast());
-//                newRoom.setFoodDelivery(hotel.isFoodDelivery());
-//                newRoom.setBookings(DB.selectBookingsByRoom(newRoom.getRoomID()));
-//                hotel.setRoom(newRoom);
-//            }
+            rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id AND h.hotel_id = "+hotel.getHotelID()+" AND r.room_id IN (SELECT room_id FROM Booking WHERE date(now()) <= end_date)");
+            while (rs.next()) {
+                Room newRoom = new Room();
+                newRoom.setAddress(rs.getString("address"));
+                newRoom.setCity(rs.getString("city"));
+                newRoom.setName(rs.getString("name"));
+                newRoom.setRoomDescription(rs.getString("description"));
+                newRoom.setRoomID(rs.getInt("room_id"));
+                newRoom.setRoomName(rs.getInt("number"));
+                newRoom.setRoomPrice(rs.getFloat("price"));
+                newRoom.setState(rs.getString("state"));
+                newRoom.setRating(rs.getInt("rating"));
+                newRoom.setBooked(true);
+                newRoom.setBookings(DB.selectBookingsByRoom(newRoom.getRoomID()));
+                if (rs.getInt("pool") == 1) {
+                    newRoom.setPool(true);
+                } else {
+                    newRoom.setPool(false);
+                }
+                if (rs.getInt("breakfast") == 1) {
+                    newRoom.setBreakfast(true);
+                } else {
+                    newRoom.setBreakfast(false);
+                }
+                if (rs.getInt("food_delivery") == 1) {
+                    newRoom.setFoodDelivery(true);
+                } else {
+                    newRoom.setFoodDelivery(false);
+                }
+                roomList.add(newRoom);
+            }
+            rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id AND h.hotel_id = "+hotel.getHotelID()+" AND r.room_id NOT IN (SELECT room_id FROM Booking WHERE now() < end_date)");
+            while (rs.next()) {
+                Room newRoom = new Room();
+                newRoom.setAddress(rs.getString("address"));
+                newRoom.setCity(rs.getString("city"));
+                newRoom.setName(rs.getString("name"));
+                newRoom.setRoomDescription(rs.getString("description"));
+                newRoom.setRoomID(rs.getInt("room_id"));
+                newRoom.setRoomName(rs.getInt("number"));
+                newRoom.setRoomPrice(rs.getFloat("price"));
+                newRoom.setState(rs.getString("state"));
+                newRoom.setRating(rs.getInt("rating"));
+                newRoom.setBooked(false);
+                if (rs.getInt("pool") == 1) {
+                    newRoom.setPool(true);
+                } else {
+                    newRoom.setPool(false);
+                }
+                if (rs.getInt("breakfast") == 1) {
+                    newRoom.setBreakfast(true);
+                } else {
+                    newRoom.setBreakfast(false);
+                }
+                if (rs.getInt("food_delivery") == 1) {
+                    newRoom.setFoodDelivery(true);
+                } else {
+                    newRoom.setFoodDelivery(false);
+                }
+                roomList.add(newRoom);
+            }
             conn.close();
         } catch (Exception e) {
             throw new IllegalStateException("", e);
