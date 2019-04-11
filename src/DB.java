@@ -124,7 +124,10 @@ public class DB {
                 newRoom.setRoomName(rs.getInt("number"));
                 newRoom.setRoomPrice(rs.getFloat("price"));
                 newRoom.setState(rs.getString("state"));
+                newRoom.setHotelID(rs.getInt("hotel_id"));
                 newRoom.setRating(rs.getInt("rating"));
+                newRoom.setStartDate(rs.getString("start_date"));
+                newRoom.setEndDate(rs.getString("end_date"));
                 if (rs.getInt("pool") == 1) {
                     newRoom.setPool(true);
                 } else {
@@ -147,6 +150,28 @@ public class DB {
             throw new IllegalStateException("", e);
         }
         return roomList;
+    }
+    
+    public static ArrayList<RequestBooking> selectClientBookings(int clientUuid){
+        ArrayList<RequestBooking> bookings = new ArrayList<>();
+        Connection conn = connect();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Booking WHERE customer_id = " + clientUuid);
+            while (rs.next()) {
+                RequestBooking newBooking = new RequestBooking();
+                newBooking.setRoom_id(rs.getInt("room_id"));
+                newBooking.setStart_date(rs.getString("start_date"));
+                newBooking.setEnd_date(rs.getString("end_date"));
+                newBooking.setCustomer_id(rs.getInt("customer_id"));
+                newBooking.setBooking_id(rs.getInt("booking_id"));
+                bookings.add(newBooking);
+            }
+            conn.close();
+        } catch (Exception e) {
+            throw new IllegalStateException("", e);
+        }
+        return bookings;
     }
     
     //Returns a list of all rooms in a hotel, and whether or not the rooms are booked
@@ -305,7 +330,7 @@ public class DB {
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Booking WHERE room_id = " + roomUuid);
+            ResultSet rs = statement.executeQuery("SELECT * FROM Booking WHERE room_id = " + roomUuid + " AND date(now()) <= end_date ORDER BY start_date");
             while (rs.next()) {
                 RequestBooking newBooking = new RequestBooking();
                 newBooking.setRoom_id(rs.getInt("room_id"));
@@ -322,14 +347,13 @@ public class DB {
         return bookings;
     }
 
-    //NOTE: Timestamps a little buggy but it does contain all important information thats in the database
     //Returns a list of requests made by a specific client
-    public static ArrayList<PersonalRequest> selectRequestsByClient(int clientUuid) {
+    public static ArrayList<PersonalRequest> selectRequestsByClient(int clientUuid, int managerUuid) {
         ArrayList<PersonalRequest> requests = new ArrayList<>();
         Connection conn = connect();
         try {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Request WHERE customer_id = " + clientUuid);
+            ResultSet rs = statement.executeQuery("SELECT * FROM Request WHERE customer_id = " + clientUuid + " AND manager_id = " + managerUuid + " AND creation_time > (SELECT start_date FROM Booking WHERE start_date <= date(now()) AND end_date >= date(now()) AND customer_id = "+clientUuid+")");
             while (rs.next()) {
                 PersonalRequest newReq = new PersonalRequest();
                 newReq.setCategory(rs.getString("category"));
@@ -409,23 +433,70 @@ public class DB {
                     hotel.setFoodDelivery(false);
                 }
             }
-            rs = statement.executeQuery("SELECT * FROM Room WHERE hotel_id = '" + hotel.getHotelID() + "'");
+            ArrayList<Room> roomList = new ArrayList<>();
+            
+            rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id AND h.hotel_id = "+hotel.getHotelID()+" AND r.room_id IN (SELECT room_id FROM Booking WHERE date(now()) <= end_date)");
             while (rs.next()) {
                 Room newRoom = new Room();
-                newRoom.setAddress(hotel.getAddress());
-                newRoom.setCity(hotel.getCity());
-                newRoom.setName(hotel.getName());
+                newRoom.setAddress(rs.getString("address"));
+                newRoom.setCity(rs.getString("city"));
+                newRoom.setName(rs.getString("name"));
                 newRoom.setRoomDescription(rs.getString("description"));
                 newRoom.setRoomID(rs.getInt("room_id"));
                 newRoom.setRoomName(rs.getInt("number"));
                 newRoom.setRoomPrice(rs.getFloat("price"));
-                newRoom.setState(hotel.getState());
-                newRoom.setRating(hotel.getRating());
-                newRoom.setPool(hotel.isPool());
-                newRoom.setBreakfast(hotel.isBreakfast());
-                newRoom.setFoodDelivery(hotel.isFoodDelivery());
-                hotel.setRoom(newRoom);
+                newRoom.setState(rs.getString("state"));
+                newRoom.setRating(rs.getInt("rating"));
+                newRoom.setBooked(true);
+                newRoom.setBookings(DB.selectBookingsByRoom(newRoom.getRoomID()));
+                if (rs.getInt("pool") == 1) {
+                    newRoom.setPool(true);
+                } else {
+                    newRoom.setPool(false);
+                }
+                if (rs.getInt("breakfast") == 1) {
+                    newRoom.setBreakfast(true);
+                } else {
+                    newRoom.setBreakfast(false);
+                }
+                if (rs.getInt("food_delivery") == 1) {
+                    newRoom.setFoodDelivery(true);
+                } else {
+                    newRoom.setFoodDelivery(false);
+                }
+                roomList.add(newRoom);
             }
+            rs = statement.executeQuery("SELECT * FROM Room r, Hotel h WHERE r.hotel_id = h.hotel_id AND h.hotel_id = "+hotel.getHotelID()+" AND r.room_id NOT IN (SELECT room_id FROM Booking WHERE now() < end_date)");
+            while (rs.next()) {
+                Room newRoom = new Room();
+                newRoom.setAddress(rs.getString("address"));
+                newRoom.setCity(rs.getString("city"));
+                newRoom.setName(rs.getString("name"));
+                newRoom.setRoomDescription(rs.getString("description"));
+                newRoom.setRoomID(rs.getInt("room_id"));
+                newRoom.setRoomName(rs.getInt("number"));
+                newRoom.setRoomPrice(rs.getFloat("price"));
+                newRoom.setState(rs.getString("state"));
+                newRoom.setRating(rs.getInt("rating"));
+                newRoom.setBooked(false);
+                if (rs.getInt("pool") == 1) {
+                    newRoom.setPool(true);
+                } else {
+                    newRoom.setPool(false);
+                }
+                if (rs.getInt("breakfast") == 1) {
+                    newRoom.setBreakfast(true);
+                } else {
+                    newRoom.setBreakfast(false);
+                }
+                if (rs.getInt("food_delivery") == 1) {
+                    newRoom.setFoodDelivery(true);
+                } else {
+                    newRoom.setFoodDelivery(false);
+                }
+                roomList.add(newRoom);
+            }
+            hotel.setRoomList(roomList);
             conn.close();
         } catch (Exception e) {
             throw new IllegalStateException("", e);
