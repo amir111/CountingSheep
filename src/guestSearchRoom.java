@@ -96,6 +96,11 @@ public class guestSearchRoom extends JFrame {
         lblDate.setFont(new Font("Arial Black", Font.PLAIN, 20));
         lblDate.setBounds(191, 247, 65, 16);
         contentPane.add(lblDate);
+        
+        JLabel lblFormat = new JLabel("Format MM-DD-YYYY");
+        lblFormat.setFont(new Font("Arial Black", Font.PLAIN, 20));
+        lblFormat.setBounds(191, 300, 500, 16);
+        contentPane.add(lblFormat);
 
         textField = new JTextField();
         textField.setBounds(295, 144, 153, 36);
@@ -211,9 +216,23 @@ public class guestSearchRoom extends JFrame {
                         JOptionPane.showMessageDialog(btnSearch, "Invalid end Year Entered, must be a 4 digit number that does not start with 0");
                         throw new Exception();
                     }
+                    
+                    ArrayList<RequestBooking> previousBookings = DB.selectClientBookings(currentUser.getUuid());
+                    for (int j = 0; j < previousBookings.size(); j++) {
+                            if (CheckDateOverlap.CheckTheDatesPlox(Integer.valueOf(startYear.getText().trim()), Integer.valueOf(startMonth.getText().trim()),
+                                    Integer.valueOf(startDay.getText().trim()), Integer.valueOf(endYear.getText().trim()),
+                                    Integer.valueOf(endMonth.getText().trim()), Integer.valueOf(endDay.getText().trim()), previousBookings.get(j).getStart_date(), previousBookings.get(j).getEnd_date())) {
 
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(btnSearch, "You already have a booking made around this time");
+                                throw new Exception();
+                            }
+                    }
+                    
                     rooms = DB.selectRooms(inputPrice, textField.getText());
                     String startDate = startYear.getText() + "-" + startMonth.getText() + "-" + startDay.getText();
+                    String endDate = endYear.getText() + "-" + endMonth.getText() + "-" + endDay.getText();
                     //
                     ArrayList<RequestBooking> bookings;
                     for (int i = 0; i < rooms.size(); i++) {
@@ -224,7 +243,6 @@ public class guestSearchRoom extends JFrame {
                                     Integer.valueOf(endMonth.getText().trim()), Integer.valueOf(endDay.getText().trim()), bookings.get(j).getStart_date(), bookings.get(j).getEnd_date())) {
 
                             } else {
-                                //JOptionPane.showMessageDialog(btnSearch, "CC Invalid, please enter a 16 digit card number that has no letters and doesn't start with 0");
                                 rooms.remove(i);
                                 i--;
                                 break;
@@ -232,13 +250,6 @@ public class guestSearchRoom extends JFrame {
                         }
                     }
 
-//System.out.println(startDate);
-                    String endDate = "1997-08-25";
-                    //checkDateOverlap
-
-//                    String startDate = "1997-08-23";
-//                    String endDate = "1997-08-25";
-                    //NOTE: Process this list and remove rooms that have bookings that conflict with inputed dates here
                     guestBookRoom broom = new guestBookRoom(currentUser, rooms, startDate, endDate);
                     broom.setVisible(true);
                     close();
