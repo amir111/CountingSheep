@@ -84,7 +84,7 @@ public class Login {
 				String uname = usernamefield.getText();
 				String pds = passwordfield.getText();
                                 try{
-                                    //checks
+                                 
                                 if(UserLogIn.checkLogIn(uname, pds).ID=='M'){
                                     User currentUser = DB.selectTargetUser(uname);
                                     frame.dispose();
