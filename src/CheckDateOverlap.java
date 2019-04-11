@@ -26,12 +26,12 @@ public class CheckDateOverlap {
         Date start_date2 = Date.valueOf(LocalDate.of(Integer.valueOf(start_date22.substring(0, 4)), Integer.valueOf(start_date22.substring(5, 7)), Integer.valueOf(start_date22.substring(8, 10))));
         Date end_date2 = Date.valueOf(LocalDate.of(Integer.valueOf(end_date22.substring(0, 4)), Integer.valueOf(end_date22.substring(5, 7)), Integer.valueOf(end_date22.substring(8, 10))));
         if ((start_date.getTime() <= end_date2.getTime()) && (start_date2.getTime() <= end_date.getTime())) {
-            //System.out.println("conflict");
-            //System.out.println(start_date + " " + end_date + " " + start_date2 + " " + end_date2);
+            System.out.println("conflict");
+            System.out.println(start_date + " " + end_date + " " + start_date2 + " " + end_date2);
             return false;
         } else {
-            //System.out.println("no conflict");
-            //System.out.println(start_date + " " + end_date + " " + start_date2 + " " + end_date2);
+            System.out.println("no conflict");
+            System.out.println(start_date + " " + end_date + " " + start_date2 + " " + end_date2);
             return true; 
         }
     }

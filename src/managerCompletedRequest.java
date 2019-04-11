@@ -97,7 +97,7 @@ public class managerCompletedRequest extends JFrame {
                 
                 while(requestList.hasNext()){
                     PersonalRequest currentReq = (PersonalRequest) requestList.next();
-                    request.append("Customer: " + currentReq.customerName + "\n");
+                    request.append("Customer: " + "\n");
                     request.append("Category: " + currentReq.category + "\n");
                     request.append("Description: " + currentReq.desc + "\n");
                     request.append("\n");
