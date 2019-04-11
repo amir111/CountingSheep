@@ -8,6 +8,9 @@ public class Room extends Hotel {
     //For DB.selectBookedRooms()
     boolean booked;
     ArrayList<RequestBooking> bookings;
+    //For DB.selectClientBookedRooms()
+    String startDate;
+    String endDate;
     
     public Room(){
         
@@ -63,6 +66,22 @@ public class Room extends Hotel {
     
     public void addBooking(RequestBooking addition){
         this.bookings.add(addition);
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
     
     
